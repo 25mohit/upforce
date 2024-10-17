@@ -8,7 +8,7 @@ const User = () => {
 
   return (
     <Section>
-        <div className='main h-full w-fit flex flex-col justify-center items-center mx-auto'>
+        <div className='main pt-16 h-full w-fit flex flex-col justify-center items-center mx-auto'>
             {/* Breadcrumb */}
             <div className="flex space-x-4 mb-6">
                 <button
@@ -29,7 +29,7 @@ const User = () => {
             {isLogin ? (
                 <div className='form-container mx-auto'>
                 <h2 className="text-2xl font-bold mb-6">Login</h2>
-                <form>
+                <form className='flex flex-col gap-7'>
                     <Input
                     type="email"
                     placeholder="Email"
@@ -40,7 +40,7 @@ const User = () => {
                     />
                     <button
                     type="submit"
-                    className="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                     >
                     Login
                     </button>
@@ -49,7 +49,7 @@ const User = () => {
             ) : (
                 <div className='form-container mx-auto'>
                 <h2 className="text-2xl font-bold mb-6">Register</h2>
-                <form>
+                <form className='flex flex-col gap-7'>
                     <Input
                     type="text"
                     placeholder="Username"
@@ -64,7 +64,7 @@ const User = () => {
                     />
                     <button
                     type="submit"
-                    className="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                     >
                     Register
                     </button>

@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Input = ({ type, placeholder }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [uniqueKey, setUniqueKey] = useState()
+  const [showPass, setShowPass] = useState(false)
 
   useEffect(() => {
     setUniqueKey(new Date().getTime())
@@ -23,11 +25,14 @@ const Input = ({ type, placeholder }) => {
       {/* Input Field */}
       <input
         id={uniqueKey}
-        type={type}
+        type={type === 'password' ? (showPass ? 'text' : 'password') : type}
         className="w-full text-gray-800 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
         onFocus={() => setIsFocused(true)}
         onBlur={(e) => !e.target.value && setIsFocused(false)} // Keep label up if input is filled
       />
+      {
+        type === 'password' && ( !showPass ? <FaEye onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/> : <FaEyeSlash onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/>)
+      }
     </div>
   );
 };
