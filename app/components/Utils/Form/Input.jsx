@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react';
 
 const Input = ({ type, placeholder }) => {
@@ -9,7 +10,7 @@ const Input = ({ type, placeholder }) => {
   },[])
   
   return (
-    <div className="relative mt-6">
+    <div className="relative">
       {/* Label/Placeholder */}
       <label
         className={`absolute left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${

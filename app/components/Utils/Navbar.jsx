@@ -16,11 +16,11 @@ export default function Navbar() {
         
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <Link href="/">MyLogo</Link>
+          <Link href="/"><i>Event Manager</i></Link>
         </div>
 
         {/* Center Menu */}
-        <div className="hidden md:flex space-x-8 text-lg">
+        <div className="hidden md:flex space-x-8 text-md">
           <Link href="/" className="hover:text-gray-400 transition duration-300">Home</Link>
           <Link href="/about" className="hover:text-gray-400 transition duration-300">About</Link>
           <Link href="/services" className="hover:text-gray-400 transition duration-300">Services</Link>
@@ -29,7 +29,7 @@ export default function Navbar() {
 
         {/* Login Link */}
         <div className="hidden md:block">
-          <Link href="/user" className="font-bold">
+          <Link href="/user" className="font-light">
             Want to Login?
           </Link>
         </div>

@@ -40,14 +40,86 @@
     padding: var(--main-padding);
 }
 .form-container{
-    width: 40vw;
+    width: 35vw;
     min-width: 400px;
+}
+.hero-image{
+    box-shadow: 0 0 5px 1px rgba(20,20,20,0.4);
+}
+.stats {
+    transition: 0.5s;
+    min-width: 100px;
+}
+.stats.active{
+    background-color: rgba(6, 188, 6, 0.59);
+}
+.stats.pending{
+    background-color: rgba(255, 166, 0, 0.532);
+}
+.stats.deleted{
+    background-color: rgba(255, 0, 0, 0.614);
+}
+.stats.canceled{
+    background-color: rgba(0, 94, 255, 0.549);
+}
+.btns{
+    height: 100%;
+}
+.button{
+    white-space: nowrap;
+    background-color: rgb(19, 162, 48);
+    color: white;
+    font-weight: 500;
+    padding: 0.3rem 1rem;
+    border-radius: 25px;
+    box-shadow: 0 0 10px 2px rgba(10,10,10,0.2);
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 0.2rem;
+    border: 1px solid white;
+    transition: 0.4s;
+}
+.button:hover{
+    color: green;
+    background-color: white;
+    transition: 0.4s;
+}
+.tab-container{
+    max-width: 100%;
+    overflow: auto;
+}
+.table{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.156);
+}
+.table table{
+    width: 100%;
+    /* overflow: auto; */
+}
+.table table thead th{
+    padding: 0.6rem 1rem;
+    white-space: nowrap;
+}
+.table table tbody td{
+    text-align: center;
+    padding: 1rem;
+}
+#icon{
+    cursor: pointer;
+}
+.table table tbody td:nth-last-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 @media screen and (max-width: 550px) {
     .pc-nav, .footer, .home-wrapper, .section{
         padding: 0 2rem;
     }
-    .form-container{
+    .form-container, .main{
         min-width: 100%;
     }
     .footer{
