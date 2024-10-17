@@ -1,10 +1,10 @@
 import Hero from "./components/Section/Hero";
-import Section from "./components/HOC/Section";
+import HomeWrapper from "./components/HOC/HomeWrapper";
 
 export default function Home() {
   return (
-    <Section>
+    <HomeWrapper>
       <Hero />
-    </Section>
+    </HomeWrapper>
   );
 }

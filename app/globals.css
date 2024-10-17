@@ -2,26 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*{
+    --nav-height: 5rem;
+    --footer-height: 3rem;
+    --main-padding: 0 4rem;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.body{
+    background: linear-gradient(145deg, #5a074c, #781166, #f268d2);
+    min-height: 100vh;
+    color: white;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.home-wrapper{
+    height: calc(100vh - var(--footer-height) - var(--nav-height));
+    padding: var(--main-padding);
 }
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.navbar{
+    height: var(--nav-height);
+}
+.footer{
+    height: var(--footer-height);
+}
+.section{
+    padding: var(--main-padding);
+    min-height: calc(100vh - var(--footer-height) - var(--nav-height));
+}
+.left{
+    flex: 1;
+}
+.right{
+    flex: 1;
+}
+.footer > p{
+    margin: 0;
+    padding: 0;
+}
+.pc-nav, .footer{
+    padding: var(--main-padding);
+}
+.form-container{
+    width: 40vw;
+    min-width: 400px;
+}
+@media screen and (max-width: 550px) {
+    .pc-nav, .footer, .home-wrapper, .section{
+        padding: 0 2rem;
+    }
+    .form-container{
+        min-width: 100%;
+    }
+    .footer{
+        font-size: 2.4vw;
+    }
 }

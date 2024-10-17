@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from 'react';
+
+const Input = ({ type, placeholder }) => {
+  const [isFocused, setIsFocused] = useState(false); // Manage focus state
+  const [uniqueKey, setUniqueKey] = useState()
+
+  useEffect(() => {
+    setUniqueKey(new Date().getTime())
+  },[])
+  
+  return (
+    <div className="relative mt-6">
+      {/* Label/Placeholder */}
+      <label
+        className={`absolute left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${
+          isFocused ? '-translate-y-4 ml-0 text-sm bg-blue-600 text-white px-2 rounded-sm' : 'translate-y-2 text-base'
+        }`}
+        id={uniqueKey}
+      >
+        {placeholder}
+      </label>
+      {/* Input Field */}
+      <input
+        id={uniqueKey}
+        type={type}
+        className="w-full text-gray-800 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+        onFocus={() => setIsFocused(true)}
+        onBlur={(e) => !e.target.value && setIsFocused(false)} // Keep label up if input is filled
+      />
+    </div>
+  );
+};
+
+export default Input;

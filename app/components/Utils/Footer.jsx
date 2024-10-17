@@ -2,7 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className='footer flex items-center'>
+      <p className='text-gray-400'>All Rights are &copy; Copywrite reserved 2024-25 from EventManager Pvt. Ltd.</p>
+    </footer>
   )
 }
 
