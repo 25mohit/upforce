@@ -72,6 +72,13 @@ const Table = () => {
                     <td>Active</td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Movie Night</td>
+                    <td>02-July-1995</td>
+                    <td>Active</td>
+                    <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
+                </tr>
             </tbody>
         </table>
     </div>
