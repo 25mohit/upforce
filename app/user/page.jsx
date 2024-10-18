@@ -2,10 +2,21 @@
 import React, { useState } from 'react';
 import Section from '../components/HOC/Section';
 import Input from '../components/Utils/Form/Input';
+import { useDispatch } from 'react-redux';
+import { RegisterUser } from '@/redux/slices/userSlice';
 
 const User = () => {
-  const [isLogin, setIsLogin] = useState(true); // State to switch between login and register
+  const [isLogin, setIsLogin] = useState(true);
+  const [registerForm, setRegisterForm] = useState({})
 
+  const dispatch = useDispatch()
+
+  const onRegisterHandler = (e) => {
+    e.preventDefault()
+    console.log("registerForm", registerForm);
+    
+    dispatch(RegisterUser())
+  }
   return (
     <Section>
         <div className='main pt-16 h-full w-fit flex flex-col justify-center items-center mx-auto'>
@@ -30,11 +41,15 @@ const User = () => {
                 <div className='form-container mx-auto'>
                 <h2 className="text-2xl font-bold mb-6">Login</h2>
                 <form className='flex flex-col gap-7'>
-                    <Input
+                    <Input 
+                    value={registerForm.email}
+                    onChange={e => setRegisterForm({...registerForm, 'email':e.target.value})}
                     type="email"
                     placeholder="Email"
                     />
-                    <Input
+                    <Input 
+                    value={registerForm.password}
+                    onChange={e => setRegisterForm({...registerForm, 'password':e.target.value})}
                     type="password"
                     placeholder="Password"
                     />
@@ -64,6 +79,7 @@ const User = () => {
                     />
                     <button
                     type="submit"
+                    onClick={onRegisterHandler}
                     className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                     >
                     Register

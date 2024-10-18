@@ -2,13 +2,17 @@
 import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Input = ({ type, placeholder }) => {
+const Input = ({ type, placeholder, onChange, value }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [showPass, setShowPass] = useState(false)
   const [uniqueKey, setUniqueKey] = useState()
 
   useEffect(() => {
-    setUniqueKey(new Date().getTime())
+    function randomNum() {
+      const randomNumber = Math.floor(1000000 + Math.random() * 9000000);
+      return randomNumber.toString();
+  }
+    setUniqueKey(randomNum())
   },[])
   
   return (
@@ -25,6 +29,8 @@ const Input = ({ type, placeholder }) => {
       {/* Input Field */}
       <input
         id={uniqueKey}
+        onChange={onChange}
+        value={value}
         type={type === 'password' ? (showPass ? 'text' : 'password') : type}
         className="w-full text-gray-800 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
         onFocus={() => setIsFocused(true)}
