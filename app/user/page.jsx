@@ -15,7 +15,7 @@ const User = () => {
     e.preventDefault()
     console.log("registerForm", registerForm);
     
-    dispatch(RegisterUser())
+    dispatch(RegisterUser(registerForm))
   }
   return (
     <Section>
@@ -43,13 +43,13 @@ const User = () => {
                 <form className='flex flex-col gap-7'>
                     <Input 
                     value={registerForm.email}
-                    onChange={e => setRegisterForm({...registerForm, 'email':e.target.value})}
+                    onChange={e => setRegisterForm({...registerForm, ['email']:e.target.value})}
                     type="email"
                     placeholder="Email"
                     />
                     <Input 
                     value={registerForm.password}
-                    onChange={e => setRegisterForm({...registerForm, 'password':e.target.value})}
+                    onChange={e => setRegisterForm({...registerForm, ['password']:e.target.value})}
                     type="password"
                     placeholder="Password"
                     />
@@ -66,14 +66,20 @@ const User = () => {
                 <h2 className="text-2xl font-bold mb-6">Register</h2>
                 <form className='flex flex-col gap-7'>
                     <Input
+                    value={registerForm.userName}
+                    onChange={e => setRegisterForm({...registerForm, ['userName']:e.target.value})}
                     type="text"
-                    placeholder="Username"
+                    placeholder="Name"
                     />
                     <Input
+                    value={registerForm.email}
+                    onChange={e => setRegisterForm({...registerForm, ['email']:e.target.value})}
                     type="email"
                     placeholder="Email"
                     />
                     <Input
+                    value={registerForm.password}
+                    onChange={e => setRegisterForm({...registerForm, ['password']:e.target.value})}
                     type="password"
                     placeholder="Password"
                     />

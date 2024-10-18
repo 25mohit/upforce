@@ -5,8 +5,7 @@ export const ShowLoader = createAsyncThunk("ShowLoader", async (isLoading) => {
   }
 )
 const initialState = {
-  customLoading: false,
-  customNotification: {}
+  customLoading: false
 };
 
 const SettingSlice = createSlice({

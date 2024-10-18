@@ -167,6 +167,14 @@
     justify-content: center;
     pointer-events: none;
 }
+.loader{
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+}
 .modal.active{
     transform: translateY(-2rem);
     opacity: 1;
