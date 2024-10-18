@@ -1,34 +1,40 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ENDPOINT } from "../api";
-import { ShowLoader } from "./settingSlice";
+import { GetResponse, ShowLoader } from "./settingSlice";
 import { toast } from "react-toastify";
 
-// export const SignInUser = createAsyncThunk("SignInUser", async (payload, { dispatch }) => {
-//   dispatch(ShowLoader(true))
-//   try {
-//     const response = await axios.post(`${ENDPOINT}api/users/login`, payload);
-//     dispatch(ShowLoader(false))
-//     return response.data
-//   }
-//   catch (error) {
-//     dispatch(ShowLoader(false))
-//     throw error;
-//   }
-// })
+export const SignInUser = createAsyncThunk("SignInUser", async (payload, { dispatch }) => {
+  dispatch(ShowLoader(true))
+  try {
+    const response = await axios.post(`${ENDPOINT}api/users/login`, payload);
+    localStorage.setItem('token', response.data.token)
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(response.data))
+    toast.success("Logged In Successfully");
+    return response.data
+}
+catch (error) {
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(error.response.data))
+    toast.warn(error.response.data.message);
+    throw error;
+  }
+})
 
 export const RegisterUser = createAsyncThunk("RegisterUser", async (payload, { dispatch }) => {
   dispatch(ShowLoader(true))
   try {
     const response = await axios.post(`${ENDPOINT}api/users/register`, payload);
     dispatch(ShowLoader(false))
-    toast.success("MY SUCCESS");
+    dispatch(GetResponse(response.data))
+    toast.success("Registered Successfully");
     return response.data
 }
 catch (error) {
-    console.log("mohit error",error);
     dispatch(ShowLoader(false))
-    toast.warn("MY SUCCESS");    
+    dispatch(GetResponse(error.response.data))
+    toast.warn(error.response.data.message);
     throw error;
   }
 })

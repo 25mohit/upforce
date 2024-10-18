@@ -22,7 +22,7 @@ const Input = ({ type, placeholder, onChange, value }) => {
         className={`absolute pointer-events-none left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${
           isFocused ? '-translate-y-4 ml-0 text-sm bg-blue-600 text-white px-2 rounded-sm' : 'translate-y-2 text-base'
         }`}
-        id={uniqueKey}
+        htmlFor={uniqueKey}
       >
         {placeholder}
       </label>

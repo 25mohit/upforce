@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import Section from '../components/HOC/Section'
 import Stats from '../components/Utils/Card/Stats'
 import Input from '../components/Utils/Form/Input'
@@ -10,8 +11,29 @@ import FilterMenu from '../components/Utils/FilterMenu'
 import Filter from '../components/Utils/Filter'
 import EventForm from '../components/Utils/Modal/EventForm'
 import AddNewEvent from '../components/Utils/AddNewEvent'
+import { useDispatch, useSelector } from 'react-redux'
+import { GetUserEvents } from '@/redux/slices/eventsSlice'
+import { SignInUser } from '@/redux/slices/userSlice'
 
 const Dashboard = () => {
+    const [data, setData] = useState([])
+    
+    const dispatch = useDispatch()
+    const response = useSelector((state) => state?.events?.eventsList)
+    
+    useEffect(() => {
+        console.log(SignInUser, GetUserEvents);
+        
+        dispatch(GetUserEvents())
+    },[])
+
+    useEffect(() => {
+        if(response?.length){
+            setData(response)
+        }
+    },[response])
+
+    console.log("response", response);
     
   return (
     <Section>
@@ -31,7 +53,7 @@ const Dashboard = () => {
             </div>
         </div>
         <div className="tab-container">
-            <Table />
+            <Table data={data}/>
         </div>
         
     </Section>
