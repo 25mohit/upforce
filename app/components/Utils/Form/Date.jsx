@@ -20,21 +20,17 @@ const Date = ({ placeholder, onChange, value }) => {
 
     useEffect(() => {
       if(value?.length){
-        setSelectedDate(value)
+        setSelectedDate(dayjs(value))
       }
     },[value])
 
     const handleDateChange = (newValue) => {
-      setSelectedDate(newValue);
-      console.log(newValue);
-      
+      setSelectedDate(newValue);      
       if (onChange) {
         const isoString = dayjs(newValue).toISOString();
         onChange(isoString); // Pass the selected date to onChange prop
       }
     };
-
-    console.log("selectedDate", selectedDate?.length, value);
 
   return (
     <div id="asdasd" className="date-field relative w-full rounded-md" onClick={() => setIsFocused(!isFocused)}>
@@ -45,7 +41,7 @@ const Date = ({ placeholder, onChange, value }) => {
         }`}
         id={uniqueKey}
       >
-        {selectedDate?.length > 0 ? moment(dayjs(selectedDate).toISOString()).format("MMM Do YY") : placeholder}
+        {value?.length > 0 ? moment(dayjs(value).toISOString()).format("MMM Do YY") : placeholder}
       </label>
       <div className="date-ui absolute">
         {isFocused && 

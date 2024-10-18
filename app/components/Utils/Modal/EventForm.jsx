@@ -69,8 +69,10 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
                 <option>Select a Status</option>
                 <option value="active">Active</option>
                 <option value="pending">Pending</option>
+                {
+                    isEdit && <option value="cancelled">Cancel</option>
+                }
             </select>
-            {/* <Select placeholder="Select Status" /> */}
             {
                 isEdit ?
                 <Button label="Update Event" onClicker={onUpdateHandler}/> :

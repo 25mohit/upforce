@@ -30,7 +30,7 @@ const Table = ({ data, setIsActive, setEditData }) => {
                     <tr key={event?._id}>
                         <td>{index+1}</td>
                         <td>{event.name}</td>
-                        <td>{moment(event.createdAt).startOf('minutes').fromNow()}</td>
+                        <td className='whitespace-nowrap'>{moment(event.createdAt).startOf('minutes').fromNow()}</td>
                         <td className='whitespace-nowrap'>{moment(event.date).format("MMM Do YYYY")}</td>
                         <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
                         <td>

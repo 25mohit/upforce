@@ -137,7 +137,7 @@
 .chip.pending{
     background-color: rgba(204, 156, 35, 0.862);
 }
-.chip.canceled{
+.chip.cancelled{
     background-color: rgb(0, 102, 255);
 }
 .chip.deleted{
