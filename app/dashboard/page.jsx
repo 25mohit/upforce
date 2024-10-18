@@ -17,7 +17,9 @@ import { SignInUser } from '@/redux/slices/userSlice'
 
 const Dashboard = () => {
     const [data, setData] = useState([])
-    
+    const [isActive, setIsActive] = useState(false)
+    const [editData, setEditData] = useState({})
+
     const dispatch = useDispatch()
     const response = useSelector((state) => state?.events?.eventsList)
     
@@ -33,6 +35,9 @@ const Dashboard = () => {
         }
     },[response])
 
+    const onClickHandler = () => {
+        setIsActive(true)
+    }
     console.log("response", response);
     
   return (
@@ -49,13 +54,14 @@ const Dashboard = () => {
                 <Filter />
             </div>
             <div className="btns">
-                <AddNewEvent />
+                {/* <AddNewEvent /> */}
+                <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={onClickHandler}/>
             </div>
         </div>
         <div className="tab-container">
-            <Table data={data}/>
+            <Table data={data} setIsActive={setIsActive} setEditData={setEditData}/>
         </div>
-        
+        <EventForm editData={editData} isActive={isActive} setIsActive={setIsActive} setEditData={setEditData}/>
     </Section>
   )
 }

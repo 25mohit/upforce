@@ -14,6 +14,14 @@ const Input = ({ type, placeholder, onChange, value }) => {
   }
     setUniqueKey(randomNum())
   },[])
+
+  useEffect(() => {
+    if(value !== undefined && value !== ''){
+      setIsFocused(true)
+    }
+  },[value])
+  console.log("valuevalue", value);
+  
   
   return (
     <div className="relative w-full">
