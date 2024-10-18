@@ -95,6 +95,7 @@ const User = () => {
                 <h2 className="text-2xl font-bold mb-6">Register</h2>
                 <form className='flex flex-col gap-7'>
                     <Input
+                    error={true}
                     value={registerForm.userName}
                     onChange={e => setRegisterForm({...registerForm, ['userName']:e.target.value})}
                     type="text"

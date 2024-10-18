@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Input = ({ type, placeholder, onChange, value }) => {
+const Input = ({ type, placeholder, onChange, value, error }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [showPass, setShowPass] = useState(false)
   const [uniqueKey, setUniqueKey] = useState()
@@ -20,11 +20,10 @@ const Input = ({ type, placeholder, onChange, value }) => {
       setIsFocused(true)
     }
   },[value])
-  console.log("valuevalue", value);
-  
+  console.log("valuevalue", error);
   
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full input ${error ? 'error' : ''}`}>
       {/* Label/Placeholder */}
       <label
         className={`absolute pointer-events-none left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${
@@ -32,7 +31,7 @@ const Input = ({ type, placeholder, onChange, value }) => {
         }`}
         htmlFor={uniqueKey}
       >
-        {placeholder}
+        {error ? 'Field Required *' : placeholder}
       </label>
       {/* Input Field */}
       <input

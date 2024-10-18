@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetUserEvents } from '@/redux/slices/eventsSlice'
 import { SignInUser } from '@/redux/slices/userSlice'
 import { GetResponse } from '@/redux/slices/settingSlice'
+import AuthWrapper from '../components/HOC/AuthWrapper'
 
 const Dashboard = () => {
     const [data, setData] = useState([])
@@ -42,27 +43,29 @@ const Dashboard = () => {
     console.log("response", response);
     
   return (
-    <Section>
-        <div className="stats-bar flex flex-wrap gap-4">
-            <Stats type="active"/>
-            <Stats type="pending"/>
-            <Stats type="canceled"/>
-            <Stats type="deleted"/>
-        </div>
-        <div className="controls-bar my-7 flex flex-wrap items-center justify-between gap-4">
-            <div className='md:w-3/4 w-full flex gap-2 items-center relative'>
-                <Input type="text" placeholder="Start typing event name to search..." />
-                <Filter />
+    <AuthWrapper>
+        <Section>
+            <div className="stats-bar flex flex-wrap gap-4">
+                <Stats type="active"/>
+                <Stats type="pending"/>
+                <Stats type="canceled"/>
+                <Stats type="deleted"/>
             </div>
-            <div className="btns">
-                <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={onClickHandler}/>
+            <div className="controls-bar my-7 flex flex-wrap items-center justify-between gap-4">
+                <div className='md:w-3/4 w-full flex gap-2 items-center relative'>
+                    <Input type="text" placeholder="Start typing event name to search..." />
+                    <Filter />
+                </div>
+                <div className="btns">
+                    <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={onClickHandler}/>
+                </div>
             </div>
-        </div>
-        <div className="tab-container">
-            <Table data={data} setIsActive={setIsActive} setEditData={setEditData}/>
-        </div>
-        { isActive && <EventForm editData={editData} setIsActive={setIsActive} setEditData={setEditData}/>}
-    </Section>
+            <div className="tab-container">
+                <Table data={data} setIsActive={setIsActive} setEditData={setEditData}/>
+            </div>
+            { isActive && <EventForm editData={editData} setIsActive={setIsActive} setEditData={setEditData}/>}
+        </Section>
+    </AuthWrapper>
   )
 }
 
