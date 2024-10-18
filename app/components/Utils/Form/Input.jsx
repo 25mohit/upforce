@@ -44,7 +44,7 @@ const Input = ({ type, placeholder, onChange, value, error }) => {
         onBlur={(e) => !e.target.value && setIsFocused(false)} // Keep label up if input is filled
       />
       {
-        type === 'password' && ( !showPass ? <FaEye onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/> : <FaEyeSlash onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/>)
+        (type === 'password' && value?.length > 0) && ( !showPass ? <FaEye onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/> : <FaEyeSlash onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/>)
       }
     </div>
   );

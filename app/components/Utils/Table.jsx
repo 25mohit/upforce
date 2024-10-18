@@ -1,14 +1,18 @@
 import moment from 'moment';
-import React from 'react'
+import React, { useState } from 'react'
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { LuAlarmClockOff } from "react-icons/lu";
+import DeleteModal from './Modal/DeleteModal';
 
 const Table = ({ data, setIsActive, setEditData }) => {
     console.log("data", data);
+    const [deleteData, setDeleteData] = useState({})
     
     const onEditHandler = (rowData) => {
         setIsActive(true)
         setEditData(rowData)
+    }
+    const onDeleteHandler = (rowData) => {
+        setDeleteData(rowData)
     }
 
   return (
@@ -34,13 +38,13 @@ const Table = ({ data, setIsActive, setEditData }) => {
                         <td className='whitespace-nowrap'>{moment(event.date).format("MMM Do YYYY")}</td>
                         <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
                         <td>
-                            <LuAlarmClockOff title="Cancel Event" id="icon"/> 
                             <FaEdit title="Edit Event" id="icon" onClick={() => onEditHandler(event)}/> 
-                            <FaTrashAlt title="Delete Event" id="icon"/></td>
+                            <FaTrashAlt title="Delete Event" id="icon" onClick={() => onDeleteHandler(event)}/></td>
                     </tr>)
                 }
             </tbody>
         </table>
+        {Object.keys(deleteData)?.length > 0 && <DeleteModal data={deleteData} setData={setDeleteData}/> }
     </div>
   )
 }

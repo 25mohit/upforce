@@ -62,6 +62,9 @@
 .stats.canceled{
     background-color: rgba(0, 94, 255, 0.549);
 }
+.stats h3{
+    text-shadow: 5px 2px 5px rgba(62, 62, 62, 0.549);
+}
 .btns{
     height: 100%;
 }
@@ -79,6 +82,9 @@
     gap: 0.2rem;
     border: 1px solid white;
     transition: 0.4s;
+}
+.button.danger{
+    background-color: red;
 }
 .button:hover{
     color: green;
@@ -213,7 +219,7 @@
     backdrop-filter: blur(2px);
     color: rgb(70, 70, 70);
 }
-.modal header{
+.modal header, .modal > section{
     padding: 1rem;
 }
 .modal form{
