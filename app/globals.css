@@ -158,7 +158,7 @@
     gap: 0.4rem;
 }
 .event-form{
-    top:0;
+    top:0%;
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -167,26 +167,68 @@
     justify-content: center;
     pointer-events: none;
 }
-.event-form .modal{
+.modal.active{
+    transform: translateY(-2rem);
+    opacity: 1;
+}
+.modal.inactive{
+    transform: translateY(2rem);
+    opacity: 0;
+    /* transition: 0.6s; */
+}
+.modal{
+    transition: 0.6s;
     width: 450px;
+    opacity: 0;
     pointer-events: all;
     color: black;
     border-radius: 5px;
     backdrop-filter: blur(4px);
     /* color: white; */
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 0 10px 2px rgba(10,10,10,0.2);
     background-color: rgba(255, 255, 255, 0.237);
 }
 .event-form .modal header{
     font-weight: bold;
+    border-radius: 5px 5px 0 0;
     backdrop-filter: blur(2px);
     color: rgb(70, 70, 70);
 }
-.event-form .modal header, .event-form .modal form{
+.event-form .modal header{
     padding: 1rem;
 }
-
+.event-form .modal form{
+    padding: 2rem 1rem;
+}
+#asdasd{
+    width: 100%;
+    margin: 1rem 0;
+    border: 2px solid white;
+    padding: 1.2rem 0;
+    background-color: white;
+}
+.date-ui{
+    top: 115%;
+    box-shadow: 0 0 10px 2px rgba(10,10,10,0.3);
+    background-color: white;
+    z-index: 10;
+}
+.select{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    outline: none;
+    border: 2px solid white;
+    height: 2.6rem;
+    padding-left: 0.7rem;
+    background-color: white;
+}
+.select select{
+    top: 20%;
+    outline: none;
+    border: none;
+}
 @media screen and (max-width: 550px) {
     .pc-nav, .footer, .home-wrapper, .section{
         padding: 0 2rem;

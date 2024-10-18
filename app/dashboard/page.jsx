@@ -9,8 +9,10 @@ import { FcFilledFilter } from "react-icons/fc";
 import FilterMenu from '../components/Utils/FilterMenu'
 import Filter from '../components/Utils/Filter'
 import EventForm from '../components/Utils/Modal/EventForm'
+import AddNewEvent from '../components/Utils/AddNewEvent'
 
 const Dashboard = () => {
+    
   return (
     <Section>
         <div className="stats-bar flex flex-wrap gap-4">
@@ -25,13 +27,13 @@ const Dashboard = () => {
                 <Filter />
             </div>
             <div className="btns">
-                <Button icon={<MdOutlineEmojiEvents />} label="Add New Event"/>
+                <AddNewEvent />
             </div>
         </div>
         <div className="tab-container">
             <Table />
         </div>
-        <EventForm />
+        
     </Section>
   )
 }

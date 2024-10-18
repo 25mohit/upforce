@@ -4,8 +4,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Input = ({ type, placeholder }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
-  const [uniqueKey, setUniqueKey] = useState()
   const [showPass, setShowPass] = useState(false)
+  const [uniqueKey, setUniqueKey] = useState()
 
   useEffect(() => {
     setUniqueKey(new Date().getTime())
@@ -15,7 +15,7 @@ const Input = ({ type, placeholder }) => {
     <div className="relative w-full">
       {/* Label/Placeholder */}
       <label
-        className={`absolute left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${
+        className={`absolute pointer-events-none left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${
           isFocused ? '-translate-y-4 ml-0 text-sm bg-blue-600 text-white px-2 rounded-sm' : 'translate-y-2 text-base'
         }`}
         id={uniqueKey}

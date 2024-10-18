@@ -5,20 +5,22 @@ import Input from '../Form/Input';
 import Date from '../Form/Date';
 import Select from '../Form/Select';
 
-const EventForm = () => {
+const EventForm = ({ isActive, setIsActive }) => {
+    
   return (
     <div className='event-form fixed'>
-        <div className="modal">
+        <div className={`modal ${isActive ? 'active' : 'inactive'}`}>
             <header className='flex justify-between items-center'>
                 <h1>Add new Event</h1>
-                <AiOutlineClose />
+                <AiOutlineClose className='cursor-pointer' onClick={() => setIsActive(false)}/>
             </header>
-            <form action="post" className='flex flex-col gap-4'>
+            <form action="post" className='flex flex-col'>
                 <Input type="text" placeholder="Enter Event Name"/>
-                <div className="flex flex-wrap">
-                    <Date />
-                    <Select />
-                </div>
+                <Date placeholder="Event Date"/>
+                <select className='select'>
+                    <option>Select a Value</option>
+                </select>
+                {/* <Select placeholder="Select Status" /> */}
                 <Button label="Create Event"/>
             </form>
         </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = ({ label, icon }) => {
+const Button = ({ label, icon, onClicker }) => {
   return (
-    <button className='button w-fit'>{icon}{label}</button>
+    <button className='button w-fit' onClick={onClicker}>{icon}{label}</button>
   )
 }
 
