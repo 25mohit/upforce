@@ -37,7 +37,7 @@ const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Find the user by email
-  const user = await User.findOne({ email }).select('-password, -_id');
+  const user = await User.findOne({ email });
 
   console.log("user", user);
   

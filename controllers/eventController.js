@@ -12,6 +12,8 @@ const createEvent = asyncHandler(async (req, res) => {
   }
 
   // Create a new event
+  console.log(req.user);
+  
   const event = await Event.create({ 
     user: req.user._id, 
     name, 
