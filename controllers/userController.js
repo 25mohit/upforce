@@ -8,9 +8,9 @@ const generateToken = (id) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, userName } = req.body;
 
-  if (!email || !password) {
+  if (!email || !password || !userName) {
     return res.status(400).json({ success: 'no', message: 'All fields are required' });
   }
 
@@ -21,13 +21,12 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Create new user
-  const user = await User.create({ email, password });
+  const user = await User.create({ email, password, userName });
 
   if (user) {
     return res.status(201).json({
       _id: user._id,
-      email: user.email,
-      token: generateToken(user._id),
+      email: user.email
     });
   } else {
     return res.status(400).json({ success: 'no', message: 'Invalid user data' });
@@ -42,7 +41,6 @@ const authUser = asyncHandler(async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     return res.json({
-      _id: user._id,
       email: user.email,
       token: generateToken(user._id),
     });
