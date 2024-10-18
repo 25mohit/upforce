@@ -10,7 +10,7 @@ const Table = ({ data, setIsActive, setEditData }) => {
         setIsActive(true)
         setEditData(rowData)
     }
-    
+
   return (
     <div className='table rounded-md'>
         <table>
@@ -31,7 +31,7 @@ const Table = ({ data, setIsActive, setEditData }) => {
                         <td>{index+1}</td>
                         <td>{event.name}</td>
                         <td>{moment(event.createdAt).startOf('minutes').fromNow()}</td>
-                        <td>{moment(event.date).startOf('minutes').fromNow()}</td>
+                        <td className='whitespace-nowrap'>{moment(event.date).format("MMM Do YYYY")}</td>
                         <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
                         <td>
                             <LuAlarmClockOff title="Cancel Event" id="icon"/> 

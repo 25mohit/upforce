@@ -8,7 +8,7 @@ import moment from 'moment';
 const Date = ({ placeholder, onChange, value }) => {
     const [uniqueKey, setUniqueKey] = useState()
     const [isFocused, setIsFocused] = useState(false); // Manage focus state
-    const [selectedDate, setSelectedDate] = useState(value || null); // Date state
+    const [selectedDate, setSelectedDate] = useState(null); // Date state
 
     useEffect(() => {
         function randomNum() {
@@ -17,6 +17,12 @@ const Date = ({ placeholder, onChange, value }) => {
         }
         setUniqueKey(randomNum());
     },[])
+
+    useEffect(() => {
+      if(value?.length){
+        setSelectedDate(value)
+      }
+    },[value])
 
     const handleDateChange = (newValue) => {
       setSelectedDate(newValue);
@@ -28,8 +34,7 @@ const Date = ({ placeholder, onChange, value }) => {
       }
     };
 
-    console.log("selectedDate", selectedDate);
-    
+    console.log("selectedDate", selectedDate?.length, value);
 
   return (
     <div id="asdasd" className="date-field relative w-full rounded-md" onClick={() => setIsFocused(!isFocused)}>
@@ -40,7 +45,7 @@ const Date = ({ placeholder, onChange, value }) => {
         }`}
         id={uniqueKey}
       >
-        {selectedDate !== null ? moment(dayjs(selectedDate).toISOString()).format("MMM Do YY") : placeholder}
+        {selectedDate?.length > 0 ? moment(dayjs(selectedDate).toISOString()).format("MMM Do YY") : placeholder}
       </label>
       <div className="date-ui absolute">
         {isFocused && 

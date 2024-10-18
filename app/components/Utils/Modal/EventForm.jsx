@@ -3,30 +3,31 @@ import { AiOutlineClose } from "react-icons/ai";
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import Date from '../Form/Date';
-import Select from '../Form/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddNewEvent, GetUserEvents } from '@/redux/slices/eventsSlice';
+import { AddNewEvent, GetUserEvents, UpdateEvent } from '@/redux/slices/eventsSlice';
 
-const EventForm = ({ isActive, setIsActive, editData, setEditData }) => {
+const EventForm = ({ setIsActive, editData, setEditData }) => {
     
     const [formData, setFormData] = useState({
         name: '',
         date: '',
         status: ''
     })
+    const [isEdit, setIsEdit] = useState(false)
 
     const response = useSelector((state) => state?.settings?.response)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if(editData && Object.keys(editData).length > 0){
+            setIsEdit(true)
             setFormData(editData)
         } 
-        console.log("formData", formData, editData, response);
-    },[isActive, editData])    
+    },[editData])    
+    console.log("formData",editData, formData, response);
 
     useEffect(() => {
-        if(response && Object.keys(formData).length > 0){
+        if(response && Object.keys(response).length > 0){
             if(response?._id !== undefined){
                 setFormData({})
                 setIsActive(false)
@@ -34,37 +35,49 @@ const EventForm = ({ isActive, setIsActive, editData, setEditData }) => {
             }
         }
     },[response])
-    // console.log("formData", formData, response);
     
     const onClickHandler = e => {
         e.preventDefault()
         dispatch(AddNewEvent(formData))
     }
 
-    const onCloseHandler = () => {
+    const clearData = () => {
         setFormData({})
-        setIsActive(false); 
         setEditData({})
     }
+    const onUpdateHandler = e => {
+        e.preventDefault()
+        dispatch(UpdateEvent(formData))
+        clearData()
+    }
+
+    const onCloseHandler = () => {
+        clearData()
+        setIsActive(false); 
+    }
+    
   return (
-    <div className='event-form fixed'>
-        <div className={`modal ${isActive ? 'active' : 'inactive'} `}>
-            <header className='flex justify-between items-center'>
-                <h1>Add new Event</h1>
-                <AiOutlineClose className='cursor-pointer' onClick={onCloseHandler}/>
-            </header>
-            <form action="post" className='flex flex-col'>
-                <Input onChange={e => setFormData({...formData, ['name']:e.target.value})} value={formData.name} type="text" placeholder="Enter Event Name"/>
-                <Date placeholder="Event Date" onChange={(date) => setFormData({...formData, date})} value={formData?.date}/>
-                <select className='select' onChange={e => setFormData({...formData, ['status']:e.target.value})} value={formData.status}>
-                    <option>Select a Status</option>
-                    <option value="active">Active</option>
-                    <option value="pending">Pending</option>
-                </select>
-                {/* <Select placeholder="Select Status" /> */}
+    <div className='modal'>
+        <header className='flex justify-between items-center'>
+            <h1>{isEdit ? 'Update' : 'Add new'} Event</h1>
+            <AiOutlineClose className='cursor-pointer' onClick={onCloseHandler}/>
+        </header>
+        <form action="post" className='flex flex-col gap-2'>
+            <Input onChange={e => setFormData({...formData, ['name']:e.target.value})} value={formData.name} type="text" placeholder="Enter Event Name"/>
+            <Date placeholder="Event Date" onChange={(date) => setFormData({...formData, date})} value={formData?.date}/>
+            <select className='select' onChange={e => setFormData({...formData, ['status']:e.target.value})} value={formData.status?.toLowerCase()}>
+                <option>Select a Status</option>
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+            </select>
+            {/* <Select placeholder="Select Status" /> */}
+            {
+                isEdit ?
+                <Button label="Update Event" onClicker={onUpdateHandler}/> :
                 <Button label="Create Event" onClicker={onClickHandler}/>
-            </form>
-        </div>
+
+            }
+        </form>
     </div>
   )
 }

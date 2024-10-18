@@ -52,6 +52,30 @@ catch (error) {
     throw error;
   }
 })
+export const UpdateEvent = createAsyncThunk("GetUserEvents", async (payload, { dispatch }) => {
+  dispatch(ShowLoader(true))
+  try {
+    const config = {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
+        },
+    };
+    console.log("config", config);
+    
+    const response = await axios.put(`${ENDPOINT}api/events/${payload?._id}`, payload, config);
+
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(response.data))
+    toast.success("Event Successfully Updated");
+
+    return response.data
+}
+catch (error) {
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(error.response.data))
+    throw error;
+  }
+})
 
 
 const EventsSlice = createSlice({

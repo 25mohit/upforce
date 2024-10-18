@@ -10,10 +10,10 @@ import { FcFilledFilter } from "react-icons/fc";
 import FilterMenu from '../components/Utils/FilterMenu'
 import Filter from '../components/Utils/Filter'
 import EventForm from '../components/Utils/Modal/EventForm'
-import AddNewEvent from '../components/Utils/AddNewEvent'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetUserEvents } from '@/redux/slices/eventsSlice'
 import { SignInUser } from '@/redux/slices/userSlice'
+import { GetResponse } from '@/redux/slices/settingSlice'
 
 const Dashboard = () => {
     const [data, setData] = useState([])
@@ -32,6 +32,7 @@ const Dashboard = () => {
     useEffect(() => {
         if(response?.length){
             setData(response)
+            dispatch(GetResponse({}))
         }
     },[response])
 
@@ -54,14 +55,13 @@ const Dashboard = () => {
                 <Filter />
             </div>
             <div className="btns">
-                {/* <AddNewEvent /> */}
                 <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={onClickHandler}/>
             </div>
         </div>
         <div className="tab-container">
             <Table data={data} setIsActive={setIsActive} setEditData={setEditData}/>
         </div>
-        <EventForm editData={editData} isActive={isActive} setIsActive={setIsActive} setEditData={setEditData}/>
+        { isActive && <EventForm editData={editData} setIsActive={setIsActive} setEditData={setEditData}/>}
     </Section>
   )
 }
