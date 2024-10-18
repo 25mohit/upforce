@@ -12,7 +12,7 @@ const Input = ({ type, placeholder }) => {
   },[])
   
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Label/Placeholder */}
       <label
         className={`absolute left-2 ml-2 text-gray-500 transition-all duration-300 ease-in-out transform ${

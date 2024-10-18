@@ -115,6 +115,78 @@
     align-items: center;
     gap: 1rem;
 }
+.chip{
+    color: white;
+    background-color: gray;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 1px rgba(10,10,10,0.2);
+    cursor: pointer;
+    font-weight: 500;
+}
+.chip.active{
+    background-color: green;
+}
+.chip.canceled{
+    background-color: rgb(0, 102, 255);
+}
+.chip.deleted{
+    background-color: rgb(255, 0, 0);
+}
+#filter-icon{
+    background-color: white;
+    padding: 0.2rem;
+    font-size: 1.9rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.filter-menu{
+    right: 0;
+    background-color: white;
+    color: black;
+    top: 115%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 4px rgba(10,10,10,0.2);
+}
+.filter-menu > ul > li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 0.4rem;
+}
+.event-form{
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.event-form .modal{
+    width: 450px;
+    pointer-events: all;
+    color: black;
+    border-radius: 5px;
+    backdrop-filter: blur(4px);
+    /* color: white; */
+    overflow: hidden;
+    box-shadow: 0 0 10px 2px rgba(10,10,10,0.2);
+    background-color: rgba(255, 255, 255, 0.237);
+}
+.event-form .modal header{
+    font-weight: bold;
+    backdrop-filter: blur(2px);
+    color: rgb(70, 70, 70);
+}
+.event-form .modal header, .event-form .modal form{
+    padding: 1rem;
+}
+
 @media screen and (max-width: 550px) {
     .pc-nav, .footer, .home-wrapper, .section{
         padding: 0 2rem;

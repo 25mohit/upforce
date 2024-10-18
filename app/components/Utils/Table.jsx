@@ -20,56 +20,56 @@ const Table = () => {
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip active">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Movie Night</td>
                     <td>02-July-1995</td>
-                    <td>Active</td>
+                    <td><span className="chip">Active</span></td>
                     <td><LuAlarmClockOff title="Cancel Event" id="icon"/> <FaEdit title="Edit Event" id="icon"/> <FaTrashAlt title="Delete Event" id="icon"/></td>
                 </tr>
             </tbody>
