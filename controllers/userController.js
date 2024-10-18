@@ -3,8 +3,8 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
 // Generate JWT
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+const generateToken = (id, email, name) => {
+  return jwt.sign({ id, email, name }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -37,7 +37,7 @@ const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Find the user by email
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select('-password, -_id');
 
   console.log("user", user);
   
