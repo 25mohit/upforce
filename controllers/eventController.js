@@ -67,7 +67,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
   });
 
 const getEventsForUser = asyncHandler(async (req, res) => {
-    const events = await Event.find({ user: req.user._id }).select('-updatedAt -__v'); // Find events where the user matches the logged-in user
+    const events = await Event.find({ user: req.user._id }).select('-updatedAt -__v -user'); // Find events where the user matches the logged-in user
 
     if (events.length === 0) {
         return res.status(404).json({ success: false, message: 'No Event Found' }); // Return error if no events are found
