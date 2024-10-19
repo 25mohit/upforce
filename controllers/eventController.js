@@ -11,8 +11,7 @@ const createEvent = asyncHandler(async (req, res) => {
     return res.status(400).json({ m: 'Please fill all fields' }); // Send JSON response
   }
 
-  // Create a new event
-  console.log(req.user);
+  console.log(req.user._id);
   
   const event = await Event.create({ 
     user: req.user._id, 
