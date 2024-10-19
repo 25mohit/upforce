@@ -1,9 +1,13 @@
 'use client'
 
 const AuthWrapper = props => {
-    const isUserValid = localStorage.getItem('token')
-    
+    if (typeof window !== 'undefined') {
 
+        const isUserValid = localStorage.getItem('token')
+        
+        console.log("localStorage", window, window.localStorage);
+    
+        
     if(isUserValid !== undefined && isUserValid !== null){
         return (
           <>{props.children}</>
@@ -13,6 +17,7 @@ const AuthWrapper = props => {
         window.location.reload()
         window.location.href = '/'
     }
+}
 }
 
 export default AuthWrapper

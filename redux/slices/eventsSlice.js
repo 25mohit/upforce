@@ -4,6 +4,7 @@ import { ENDPOINT } from "../api";
 import { GetResponse, ShowLoader } from "./settingSlice";
 import { toast } from "react-toastify";
 
+
 export const AddNewEvent = createAsyncThunk("AddNewEvent", async (payload, { dispatch }) => {
   dispatch(ShowLoader(true))
   try {

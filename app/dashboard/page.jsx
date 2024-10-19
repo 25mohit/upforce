@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React, { useEffect, useState } from 'react'
 import Section from '../components/HOC/Section'
 import Stats from '../components/Utils/Card/Stats'
