@@ -79,7 +79,7 @@ const getEventsForUser = asyncHandler(async (req, res) => {
 const getFilteredEvents = asyncHandler(async (req, res) => {
   const { search, sort, page = 1, status } = req.query;
 
-  let query = {};
+  let query = { user: req.user._id };
 
   if (search) {
     query.name = { $regex: search, $options: 'i' };
@@ -137,4 +137,5 @@ const getFilteredEvents = asyncHandler(async (req, res) => {
     }
   });
 })
+
 module.exports = { createEvent, updateEvent, deleteEvent, getEventsForUser, getFilteredEvents };
