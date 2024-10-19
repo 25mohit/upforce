@@ -24,8 +24,8 @@ const Pagination = ({ currentPage, pageSize, totalRecords, onPageChange }) => {
             <button
               key={page}
               onClick={() => onPageChange(page + 1)}
-              disabled={currentPage === page + 1} // Disable current page button
-              className={`page-button rounded-md ${currentPage == page + 1 ? 'active' : ''}`} // Apply active class
+              disabled={currentPage == page + 1} // Disable current page button
+              className={`page-button rounded-md ${currentPage == page + 1 ? 'active hover:cursor-not-allowed' : ''}`} // Apply active class
             >
               {page + 1}
             </button>

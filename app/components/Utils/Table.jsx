@@ -43,6 +43,7 @@ const Table = ({ data, setIsActive, setEditData }) => {
                 }
             </tbody>
         </table>
+        {!data?.events?.length && <p className='text-center py-4'>No Events to Display !</p>}
         {Object.keys(deleteData)?.length > 0 && <DeleteModal data={deleteData} setData={setDeleteData}/> }
     </div>
   )

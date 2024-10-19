@@ -70,7 +70,7 @@ const Dashboard = () => {
             </div>
             <div className="controls-bar my-7 flex flex-wrap items-center justify-between gap-4">
                 <div className='md:w-1/2 w-full flex gap-2 items-center relative'>
-                    <Input value={filterParam.value} onChange={onSearchChange} type="text" placeholder="Start typing event name to search..." />
+                    <Input value={filterParam.search} onChange={onSearchChange} type="text" placeholder="Start typing event name to search..." />
                     <Filter />
                 </div>
                 <div className="cntrns btns flex items-center gap-4">
