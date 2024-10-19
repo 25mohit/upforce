@@ -11,6 +11,7 @@ const User = () => {
   const [registerForm, setRegisterForm] = useState({})
   const [loginForm, setLoginForm] = useState({})
   const [error, setError] = useState({})
+  const [isClicked, setIsClicked] = useState(false)
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -23,6 +24,9 @@ const User = () => {
   useEffect(() => {
     if(response && Object.keys(response).length > 0){
         console.log(response.token !== undefined);
+        setIsClicked(false)
+        console.log("isLogin", isLogin, response.email !== undefined);
+        
         if(response.email !== undefined){
             if(!isLogin){
                 toogleForm(true)
@@ -36,15 +40,51 @@ const User = () => {
         }
     }
   },[response])
+
+  const LoginChangeHandler = e => {
+    const {name, value} = e.target
+    setLoginForm({...loginForm, [name]:value})
+    setError({...error, [name]: ''})
+  }
+
+  const RegisterChangeHandler = e => {
+    const {name, value} = e.target
+    setRegisterForm({...registerForm, [name]:value})
+    setError({...error, [name]: ''})
+  }
   
   const onRegisterHandler = (e) => {
-    e.preventDefault()
-    console.log("registerForm", registerForm);
-    dispatch(RegisterUser(registerForm))
+    if (isClicked) {
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+
+    if (!registerForm.email || !registerForm.password || !registerForm.userName) {
+      let err = {};
+      if (!registerForm.email) {
+        err.email = "Email Required";
+      }
+      if (!registerForm.password) {
+        err.password = "Password Required";
+      }
+      if (!registerForm.userName) {
+        err.userName = "Your name Required";
+      }
+      setError(err);
+      return;
+    } else {
+      setIsClicked(true)
+      dispatch(RegisterUser(registerForm))
+    }
   }
+
   const onLoginHandler = (e) => {
-    e.preventDefault()   
-    setError({});
+    if (isClicked) {
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
 
     if (!loginForm.email || !loginForm.password) {
       let err = {};
@@ -56,16 +96,18 @@ const User = () => {
       }
       setError(err);
       return;
-    } dispatch(SignInUser(loginForm))
+    } else {
+      setIsClicked(true)
+      dispatch(SignInUser(loginForm))
+    }
   }
 
-  console.log(error);
-  
   function toogleForm(val) {
-    setIsLogin(!val)
+    setIsLogin(val)
     setError({})
     setLoginForm({})
     setRegisterForm({})
+    setIsClicked(false)
   }
 
   return (
@@ -75,13 +117,13 @@ const User = () => {
             <div className="flex space-x-4 mb-6">
                 <button
                 className={`text-lg ${isLogin ? 'font-bold text-blue-600' : 'text-gray-400'}`}
-                onClick={() => toogleForm(false)}
+                onClick={() => toogleForm(true)}
                 >
                 Login
                 </button>
                 <button
                 className={`text-lg ${!isLogin ? 'font-bold text-blue-600' : 'text-gray-400'}`}
-                onClick={() => toogleForm(true)}
+                onClick={() => toogleForm(false)}
                 >
                 Register
                 </button>
@@ -94,13 +136,15 @@ const User = () => {
                 <form className='flex flex-col gap-7'>
                     <Input error={error.email} 
                     value={loginForm.email}
-                    onChange={e => setLoginForm({...loginForm, ['email']:e.target.value})}
+                    name='email'
+                    onChange={LoginChangeHandler}
                     type="email"
                     placeholder="Email"
                     />
                     <Input error={error.password} 
                     value={loginForm.password}
-                    onChange={e => setLoginForm({...loginForm, ['password']:e.target.value})}
+                    name='password'
+                    onChange={LoginChangeHandler}
                     type="password"
                     placeholder="Password"
                     />
@@ -118,21 +162,26 @@ const User = () => {
                 <h2 className="text-2xl font-bold mb-6">Register</h2>
                 <form className='flex flex-col gap-7'>
                     <Input
-                    error={true}
+                    error={error.userName}
                     value={registerForm.userName}
-                    onChange={e => setRegisterForm({...registerForm, ['userName']:e.target.value})}
+                    name='userName'
+                    onChange={RegisterChangeHandler}
                     type="text"
                     placeholder="Name"
                     />
                     <Input
+                    error={error.email}
                     value={registerForm.email}
-                    onChange={e => setRegisterForm({...registerForm, ['email']:e.target.value})}
+                    name='email'
+                    onChange={RegisterChangeHandler}
                     type="email"
                     placeholder="Email"
                     />
                     <Input
+                    error={error.password}
                     value={registerForm.password}
-                    onChange={e => setRegisterForm({...registerForm, ['password']:e.target.value})}
+                    name='password'
+                    onChange={RegisterChangeHandler}
                     type="password"
                     placeholder="Password"
                     />
