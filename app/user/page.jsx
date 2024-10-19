@@ -10,6 +10,7 @@ const User = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [registerForm, setRegisterForm] = useState({})
   const [loginForm, setLoginForm] = useState({})
+  const [error, setError] = useState({})
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -24,8 +25,9 @@ const User = () => {
         console.log(response.token !== undefined);
         if(response.email !== undefined){
             if(!isLogin){
-                setIsLogin(true)
-                setRegisterForm({})
+                toogleForm(true)
+                // setIsLogin(true)
+                // setRegisterForm({})
             } else {
                 window.location.reload()
                 window.location.href = '/dashboard'
@@ -38,13 +40,34 @@ const User = () => {
   const onRegisterHandler = (e) => {
     e.preventDefault()
     console.log("registerForm", registerForm);
-    
     dispatch(RegisterUser(registerForm))
   }
   const onLoginHandler = (e) => {
-    e.preventDefault()    
-    dispatch(SignInUser(loginForm))
+    e.preventDefault()   
+    setError({});
+
+    if (!loginForm.email || !loginForm.password) {
+      let err = {};
+      if (!loginForm.email) {
+        err.email = "Email Required";
+      }
+      if (!loginForm.password) {
+        err.password = "Password Required";
+      }
+      setError(err);
+      return;
+    } dispatch(SignInUser(loginForm))
   }
+
+  console.log(error);
+  
+  function toogleForm(val) {
+    setIsLogin(!val)
+    setError({})
+    setLoginForm({})
+    setRegisterForm({})
+  }
+
   return (
     <Section>
         <div className='main pt-16 h-full w-fit flex flex-col justify-center items-center mx-auto'>
@@ -52,13 +75,13 @@ const User = () => {
             <div className="flex space-x-4 mb-6">
                 <button
                 className={`text-lg ${isLogin ? 'font-bold text-blue-600' : 'text-gray-400'}`}
-                onClick={() => setIsLogin(true)}
+                onClick={() => toogleForm(false)}
                 >
                 Login
                 </button>
                 <button
                 className={`text-lg ${!isLogin ? 'font-bold text-blue-600' : 'text-gray-400'}`}
-                onClick={() => setIsLogin(false)}
+                onClick={() => toogleForm(true)}
                 >
                 Register
                 </button>
@@ -69,13 +92,13 @@ const User = () => {
                 <div className='form-container mx-auto'>
                 <h2 className="text-2xl font-bold mb-6">Login</h2>
                 <form className='flex flex-col gap-7'>
-                    <Input 
+                    <Input error={error.email} 
                     value={loginForm.email}
                     onChange={e => setLoginForm({...loginForm, ['email']:e.target.value})}
                     type="email"
                     placeholder="Email"
                     />
-                    <Input 
+                    <Input error={error.password} 
                     value={loginForm.password}
                     onChange={e => setLoginForm({...loginForm, ['password']:e.target.value})}
                     type="password"
