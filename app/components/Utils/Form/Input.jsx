@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Input = React.memo(({ type, placeholder, onChange, value, error, name }) => {
+const Input = ({ type, placeholder, onChange, value, error, name }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [showPass, setShowPass] = useState(false)
   const [uniqueKey, setUniqueKey] = useState()
@@ -48,6 +48,6 @@ const Input = React.memo(({ type, placeholder, onChange, value, error, name }) =
       }
     </div>
   )
-});
+};
 
 export default Input;
