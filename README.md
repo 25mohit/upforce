@@ -39,5 +39,7 @@ Deployed Link [https://upforce.netlify.app/](https://upforce.netlify.app/).
 
 1. Redux and Redux-Toolkit Integration for Proper state management and for API Integration/ Consumption.
 2. Toast Notification - Notification integrated in Every API, whever user integrated with an API, a Notification will popup. Exp- While Registering, Login, Adding Events, Updating Events, Deleting Events.
-3. Events Statistics - User can see there added events status. There are 3 status Active, Pending, Cancelled.
-4. Sorting Events Feature.
+3. Loading Animation every time a API is calling, and Loading auto off when API returns response.
+4. Debouncing in Search bar of, for better Performance and reduce API Invoking multiple times.
+5. Events Statistics - User can see there added events status. There are 3 status Active, Pending, Cancelled.
+6. Sorting Events Feature.

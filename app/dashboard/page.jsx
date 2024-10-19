@@ -57,7 +57,6 @@ const Dashboard = () => {
         setIsCalling(timeOut)
     }
     const handlePageChange = (page) => {
-        // setCurrentPage(page);
         dispatch(GetFilteredEvents({page}));
       };
   return (

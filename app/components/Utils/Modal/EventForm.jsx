@@ -79,8 +79,8 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
 
         const trimmedFormData = {
             ...formData,
-            name: formData.name.trim(),
-            description: formData.description.trim(),
+            name: formData.name?.trim(),
+            description: formData.description?.trim(),
         };
 
         if (!trimmedFormData.date || !trimmedFormData.name) {

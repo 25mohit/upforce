@@ -64,7 +64,7 @@ export const DeleteEvent = createAsyncThunk("DeleteEvent", async (payload, { dis
     const response = await axios.delete(`${ENDPOINT}api/events/${payload?._id}`, config);
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
-    dispatch(GetFilteredEvents({sort:'name'}))
+    dispatch(GetFilteredEvents({sort:'createdAt'}))
     toast.warn("Event Successfully Deleted");
 
     return response.data
