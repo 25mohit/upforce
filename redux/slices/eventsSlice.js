@@ -4,30 +4,6 @@ import { ENDPOINT } from "../api";
 import { GetResponse, ShowLoader } from "./settingSlice";
 import { toast } from "react-toastify";
 
-export const GetUserEvents = createAsyncThunk("GetUserEvents", async (payload, { dispatch }) => {
-  dispatch(ShowLoader(true))
-  try {
-    const config = {
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
-        },
-    };
-    console.log("config", config);
-    
-    const response = await axios.get(`${ENDPOINT}api/events/user`, config);
-
-    dispatch(ShowLoader(false))
-    dispatch(GetResponse(response.data))
-    return response.data
-}
-catch (error) {
-    dispatch(ShowLoader(false))
-    dispatch(GetResponse(error.response.data))
-    throw error;
-  }
-})
-
-
 export const AddNewEvent = createAsyncThunk("AddNewEvent", async (payload, { dispatch }) => {
   dispatch(ShowLoader(true))
   try {

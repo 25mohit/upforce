@@ -29,7 +29,7 @@ const DeleteModal = ({ data, setData }) => {
             <AiOutlineClose className='cursor-pointer' onClick={() => setData({})}/>
         </header>
         <section>
-            <h1 className='text-gray-50 mb-4'>Are you really want to delete <i><b>'{data?.name}'</b></i> ?</h1>
+            <h1 className='text-gray-50 mb-4'>Are you really want to delete <i><b>&apos;{data?.name}&apos;</b></i> ?</h1>
             <footer className='flex gap-3'>
                 <Button icon={<FaCheck />} type="danger" label="Yes" onClicker={onDeleteHandler}/>
                 <Button icon={<MdOutlineBackHand />} label="No" onClicker={() => setData({})}/>

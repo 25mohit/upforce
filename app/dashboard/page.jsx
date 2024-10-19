@@ -11,7 +11,7 @@ import FilterMenu from '../components/Utils/FilterMenu'
 import Filter from '../components/Utils/Filter'
 import EventForm from '../components/Utils/Modal/EventForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetFilteredEvents, GetUserEvents } from '@/redux/slices/eventsSlice'
+import { GetFilteredEvents } from '@/redux/slices/eventsSlice'
 import { SignInUser } from '@/redux/slices/userSlice'
 import { GetResponse } from '@/redux/slices/settingSlice'
 import AuthWrapper from '../components/HOC/AuthWrapper'
@@ -27,7 +27,6 @@ const Dashboard = () => {
     const response = useSelector((state) => state?.events?.eventsList)
     
     useEffect(() => {
-        console.log(SignInUser, GetUserEvents);
         dispatch(GetFilteredEvents(filterParam))
         // dispatch(GetUserEvents())
     },[])
