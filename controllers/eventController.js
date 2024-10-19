@@ -76,4 +76,65 @@ const getEventsForUser = asyncHandler(async (req, res) => {
     res.status(200).json(events);
 });
 
-module.exports = { createEvent, updateEvent, deleteEvent, getEventsForUser };
+const getFilteredEvents = asyncHandler(async (req, res) => {
+  const { search, sort, page = 1, status } = req.query;
+
+  let query = {};
+
+  if (search) {
+    query.name = { $regex: search, $options: 'i' };
+  }
+
+  if (status) {
+    query.status = status;
+  }
+
+  let sortOption = {};
+  if (sort === 'name') {
+    sortOption.name = 1; // ascending order
+  } else if (sort === 'createdAt') {
+    sortOption.createdAt = -1; // descending order
+  } else if (sort === 'status') {
+    sortOption.status = 1; // ascending order
+  }
+
+  const pageSize = 10;
+  const skip = (page - 1) * pageSize;
+
+  const filteredEvents = await Event.find(query)
+    .sort(sortOption)
+    .skip(skip)
+    .limit(pageSize)
+    .select('-updatedAt -__v'); // Exclude 'updatedAt' and '__v'
+
+  const eventStats = await Event.aggregate([
+    {
+      $group: {
+        _id: '$status',
+        count: { $sum: 1 }
+      }
+    }
+  ]);
+
+  let stats = {
+    active: 0,
+    pending: 0,
+    cancelled: 0
+    };
+
+  eventStats.forEach((stat) => {
+    if (stat._id === 'active') stats.active = stat.count;
+    if (stat._id === 'pending') stats.pending = stat.count;
+    if (stat._id === 'cancelled') stats.cancelled = stat.count;
+  });
+
+  res.status(200).json({
+    stats,
+    filteredData: {
+      page,
+      pageSize,
+      events: filteredEvents
+    }
+  });
+})
+module.exports = { createEvent, updateEvent, deleteEvent, getEventsForUser, getFilteredEvents };
