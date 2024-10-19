@@ -20,6 +20,8 @@ const Dashboard = () => {
     const [data, setData] = useState([])
     const [isActive, setIsActive] = useState(false)
     const [editData, setEditData] = useState({})
+    const [filterParam, setFilterParam] = useState({})
+    const [isCalling, setIsCalling] = useState(null)
 
     const dispatch = useDispatch()
     const response = useSelector((state) => state?.events?.eventsList)
@@ -40,7 +42,43 @@ const Dashboard = () => {
     const onClickHandler = () => {
         setIsActive(true)
     }
-    console.log("response", response);
+
+    const filterHandler = () => {
+
+    }
+
+    let isSearching = false
+
+    // useEffect(() => {
+    //     if(filterParam.key === 'search'){
+
+    //         if(!isSearching){
+    //             isSearching = true
+    //             console.log('API Calling');
+    //             setTimeout(() => {
+    //                 isSearching = false
+    //             },2000)
+    //         }
+    //     }
+    // },[filterParam])
+
+
+    const deboucedSearch = () => {
+        console.log("API Calling")
+    }
+    const onSearchChange = e => {
+        setFilterParam({key: 'search', value:e.target.value})
+
+        if(isCalling){
+            clearTimeout(isCalling)
+        }
+
+        const timeOut = setTimeout(() => {
+            deboucedSearch()
+        },1000)
+
+        setIsCalling(timeOut)
+    }
     
   return (
     <AuthWrapper>
@@ -49,11 +87,10 @@ const Dashboard = () => {
                 <Stats type="active"/>
                 <Stats type="pending"/>
                 <Stats type="canceled"/>
-                <Stats type="deleted"/>
             </div>
             <div className="controls-bar my-7 flex flex-wrap items-center justify-between gap-4">
                 <div className='md:w-3/4 w-full flex gap-2 items-center relative'>
-                    <Input type="text" placeholder="Start typing event name to search..." />
+                    <Input value={filterParam.value} onChange={onSearchChange} type="text" placeholder="Start typing event name to search..." />
                     <Filter />
                 </div>
                 <div className="btns">

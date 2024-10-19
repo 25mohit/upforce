@@ -20,14 +20,13 @@ const DeleteModal = ({ data, setData }) => {
     },[response])
 
     const onDeleteHandler = () => {
-        alert('asd')
         dispatch(DeleteEvent(data))
     }
   return (
     <div className='modal'>
         <header className='flex justify-between items-center'>
             <h1>Delete </h1>
-            <AiOutlineClose className='cursor-pointer'  onClick={() => setData({})}/>
+            <AiOutlineClose className='cursor-pointer' onClick={() => setData({})}/>
         </header>
         <section>
             <h1 className='text-gray-50 mb-4'>Are you really want to delete <i><b>'{data?.name}'</b></i> ?</h1>

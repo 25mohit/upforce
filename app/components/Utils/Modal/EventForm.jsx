@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { AiOutlineClose } from "react-icons/ai";
 import Button from '../Form/Button';
 import Input from '../Form/Input';
@@ -17,6 +17,7 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
 
     const response = useSelector((state) => state?.settings?.response)
     const dispatch = useDispatch()
+    console.log(response)
 
     useEffect(() => {
         if(editData && Object.keys(editData).length > 0){
@@ -24,7 +25,6 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             setFormData(editData)
         } 
     },[editData])    
-    console.log("formData",editData, formData, response);
 
     useEffect(() => {
         if(response && Object.keys(response).length > 0){
@@ -54,6 +54,12 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
         clearData()
         setIsActive(false); 
     }
+    const handleInputChange = useCallback((e) => {
+        const { name, value } = e.target;
+        if (formData[name] !== value) {
+            setFormData({ ...formData, [name]: value });
+        }
+    }, [formData]);
     
   return (
     <div className='modal'>
@@ -62,7 +68,7 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             <AiOutlineClose className='cursor-pointer' onClick={onCloseHandler}/>
         </header>
         <form action="post" className='flex flex-col gap-2'>
-            <Input onChange={e => setFormData({...formData, ['name']:e.target.value})} value={formData.name} type="text" placeholder="Enter Event Name"/>
+            <Input onChange={handleInputChange} name='name' value={formData.name} type="text" placeholder="Enter Event Name"/>
             <Date placeholder="Event Date" onChange={(date) => setFormData({...formData, date})} value={formData?.date}/>
             <select className='select' onChange={e => setFormData({...formData, ['status']:e.target.value})} value={formData.status?.toLowerCase()}>
                 <option>Select a Status</option>

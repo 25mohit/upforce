@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Input = ({ type, placeholder, onChange, value, error }) => {
+const Input = React.memo(({ type, placeholder, onChange, value, error, name }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [showPass, setShowPass] = useState(false)
   const [uniqueKey, setUniqueKey] = useState()
@@ -20,7 +20,6 @@ const Input = ({ type, placeholder, onChange, value, error }) => {
       setIsFocused(true)
     }
   },[value])
-  console.log("valuevalue", error);
   
   return (
     <div className={`relative w-full input ${error ? 'error' : ''}`}>
@@ -35,6 +34,7 @@ const Input = ({ type, placeholder, onChange, value, error }) => {
       </label>
       {/* Input Field */}
       <input
+        name={name}
         id={uniqueKey}
         onChange={onChange}
         value={value}
@@ -47,7 +47,7 @@ const Input = ({ type, placeholder, onChange, value, error }) => {
         (type === 'password' && value?.length > 0) && ( !showPass ? <FaEye onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/> : <FaEyeSlash onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/>)
       }
     </div>
-  );
-};
+  )
+});
 
 export default Input;

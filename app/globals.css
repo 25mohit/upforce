@@ -272,6 +272,7 @@
     }
     .stats-bar{
         gap: 0.2rem;
+        justify-content: space-between;
     }
     .modal{
         width: 92vw;
