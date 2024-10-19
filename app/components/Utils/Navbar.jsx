@@ -103,18 +103,18 @@ export default function Navbar() {
           <FiX size={24} />
         </button>
         <div className="mt-8 space-y-6">
-          <Link onClick={toggleMenu} href="/" className="block text-xl hover:text-gray-400 transition duration-300">
+          <span onClick={toggleMenu} className="block text-xl hover:text-gray-400 transition duration-300">
             Home
-          </Link>
-          <Link onClick={toggleMenu} href="/about" className="block text-xl hover:text-gray-400 transition duration-300">
+          </span>
+          <span onClick={toggleMenu} className="block text-xl hover:text-gray-400 transition duration-300">
             About
-          </Link>
-          <Link onClick={toggleMenu} href="/services" className="block text-xl hover:text-gray-400 transition duration-300">
+          </span>
+          <span onClick={toggleMenu} className="block text-xl hover:text-gray-400 transition duration-300">
             Services
-          </Link>
-          <Link onClick={toggleMenu} href="/contact" className="block text-xl hover:text-gray-400 transition duration-300">
+          </span>
+          <span onClick={toggleMenu} className="block text-xl hover:text-gray-400 transition duration-300">
             Contact
-          </Link>
+          </span>
           {
             info.name ? <span className='flex items-center gap-2'>{info.name} <FaSignOutAlt className='cursor-pointer' onClick={onLogoutHandler}/></span> :
             <Link onClick={toggleMenu} href="/user" className="font-bold mt-8">
