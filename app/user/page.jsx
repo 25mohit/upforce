@@ -5,11 +5,15 @@ import Input from '../components/Utils/Form/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { RegisterUser, SignInUser } from '@/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
+import { isValidEmail } from '../functions';
 
 const User = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [registerForm, setRegisterForm] = useState({})
-  const [loginForm, setLoginForm] = useState({})
+  const [loginForm, setLoginForm] = useState({
+    email:'',
+    password: ''
+  })
   const [error, setError] = useState({})
   const [isClicked, setIsClicked] = useState(false)
 
@@ -43,7 +47,7 @@ const User = () => {
 
   const LoginChangeHandler = e => {
     const {name, value} = e.target
-    setLoginForm({...loginForm, [name]:value})
+    setLoginForm({...loginForm, [name]:value.trim()})
     setError({...error, [name]: ''})
   }
 
@@ -60,22 +64,28 @@ const User = () => {
     }
     e.preventDefault();
 
-    if (!registerForm.email || !registerForm.password || !registerForm.userName) {
+    const trimmedFormData = {
+        ...registerForm,
+        userName: registerForm?.userName?.trim()
+    };
+    if (!registerForm.email || !trimmedFormData.password || !trimmedFormData.userName || !isValidEmail(registerForm.email)) {
       let err = {};
       if (!registerForm.email) {
         err.email = "Email Required";
+      } else if (!isValidEmail(registerForm.email)) {
+        err.email = "Invalid Email";
       }
-      if (!registerForm.password) {
+      if (!trimmedFormData.password) {
         err.password = "Password Required";
       }
-      if (!registerForm.userName) {
+      if (!trimmedFormData.userName) {
         err.userName = "Your name Required";
       }
       setError(err);
       return;
     } else {
       setIsClicked(true)
-      dispatch(RegisterUser(registerForm))
+      dispatch(RegisterUser(trimmedFormData))
     }
   }
 
@@ -86,10 +96,12 @@ const User = () => {
     }
     e.preventDefault();
 
-    if (!loginForm.email || !loginForm.password) {
+    if (!loginForm.email || !loginForm.password || !isValidEmail(loginForm.email)) {
       let err = {};
       if (!loginForm.email) {
         err.email = "Email Required";
+      } else if (!isValidEmail(loginForm.email)) {
+        err.email = "Invalid Email";
       }
       if (!loginForm.password) {
         err.password = "Password Required";
@@ -135,7 +147,7 @@ const User = () => {
                 <h2 className="text-2xl font-bold mb-6">Login</h2>
                 <form className='flex flex-col gap-7'>
                     <Input error={error.email} 
-                    value={loginForm.email}
+                    value={loginForm.email?.trim()}
                     name='email'
                     onChange={LoginChangeHandler}
                     type="email"

@@ -43,19 +43,26 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             return;
         }
         e.preventDefault();
-        if (!formData.date || !formData.name) {
+        
+        const trimmedFormData = {
+            ...formData,
+            name: formData.name.trim(),
+            description: formData.description.trim(),
+        };
+
+        if (!trimmedFormData.date || !trimmedFormData.name) {
             let err = {};
-            if (!formData.date) {
+            if (!trimmedFormData.date) {
                 err.date = "Event Date Required";
             }
-            if (!formData.name) {
+            if (!trimmedFormData.name) {
                 err.name = "Event Name Required";
             }
             setError(err);
             return;
         } else {
             setIsClicked(true)
-            dispatch(AddNewEvent(formData))
+            dispatch(AddNewEvent(trimmedFormData))
         }
     }
 
@@ -69,19 +76,26 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             return;
         }
         e.preventDefault();
-        if (!formData.date || !formData.name) {
+
+        const trimmedFormData = {
+            ...formData,
+            name: formData.name.trim(),
+            description: formData.description.trim(),
+        };
+
+        if (!trimmedFormData.date || !trimmedFormData.name) {
             let err = {};
-            if (!formData.date) {
+            if (!trimmedFormData.date) {
                 err.date = "Event Date Required";
             }
-            if (!formData.name) {
+            if (!trimmedFormData.name) {
                 err.name = "Event Name Required";
             }
             setError(err);
             return;
         } else {
             setIsClicked(true)
-            dispatch(UpdateEvent(formData))
+            dispatch(UpdateEvent(trimmedFormData))
             clearData()
         }
     }

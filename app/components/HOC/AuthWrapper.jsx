@@ -1,6 +1,10 @@
 const AuthWrapper = props => {
     const isUserValid = localStorage.getItem('token') 
-
+    function removeUser(){
+        localStorage.clear()
+        window.location.reload()
+        window.location.href = '/'
+    }
     if(isUserValid !== undefined && isUserValid !== null){
         
         function decrypt() {
@@ -23,11 +27,7 @@ const AuthWrapper = props => {
             return null;
             }
         }  
-        function removeUser(){
-            localStorage.clear()
-            window.location.reload()
-            window.location.href = '/'
-        }
+       
         const descrpted = decrypt()
         if(descrpted.exp < (Date.now() / 1000)){
             return removeUser()
