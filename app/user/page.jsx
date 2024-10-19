@@ -50,7 +50,7 @@ const User = () => {
   // ONCHANGE HANDLER FOR REGISTER USER FORM FIELDS
   const RegisterChangeHandler = e => {
     const {name, value} = e.target
-    setRegisterForm({...registerForm, [name]:value.trim()})
+    setRegisterForm({...registerForm, [name]:value})
     setError({...error, [name]: ''})
   }
   

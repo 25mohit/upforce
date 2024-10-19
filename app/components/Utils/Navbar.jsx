@@ -95,7 +95,7 @@ export default function Navbar() {
         <button onClick={toggleMenu} className="text-white">
           <FiX size={24} />
         </button>
-        <div className="mt-8 space-y-6">
+        <div className="mt-8 space-y-6 flex flex-col">
           <span onClick={toggleMenu} className="block text-xl hover:text-gray-400 transition duration-300">
             Home
           </span>
@@ -110,7 +110,7 @@ export default function Navbar() {
           </span>
           {
             info.name ? <span className='flex items-center gap-2'>{info.name} <FaSignOutAlt className='cursor-pointer' onClick={onLogoutHandler}/></span> :
-            <Link onClick={toggleMenu} href="/user" className="font-bold mt-8">
+            <Link onClick={toggleMenu} href="/user" className="font-bold">
               Want to Login?
             </Link>
           }
