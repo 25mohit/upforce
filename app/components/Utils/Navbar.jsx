@@ -15,16 +15,13 @@ export default function Navbar() {
   
   function decrypt() {
     const token = localStorage.getItem('token');
-  
-    // Check if the token exists
-    if (!token) {
+      if (!token) {
       console.error('No token found');
       return null;
     }
   
     const parts = token.split('.');
   
-    // Ensure the token has three parts (header, payload, and signature)
     if (parts.length !== 3) {
       console.error('Invalid token format');
       return null;
@@ -32,11 +29,9 @@ export default function Navbar() {
   
     const payload = parts[1];
   
-    // Replace URL-safe characters with standard Base64 characters
     const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
   
     try {
-      // Decode base64 and parse JSON
       const decodedPayload = JSON.parse(atob(base64));
       return setInfo({name: decodedPayload?.name, email: decodedPayload?.email})
     } catch (error) {
