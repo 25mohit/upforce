@@ -7,7 +7,6 @@ const FilterMenu = ({ setIsShow }) => {
   const dispatch = useDispatch()
 
   const onChangeHandler = e => {
-    console.log(e.target.value);
     dispatch(GetFilteredEvents({sort: e.target.value}))
     setIsShow(false)
 

@@ -31,9 +31,7 @@ const AuthWrapper = props => {
         const descrpted = decrypt()
         if(descrpted.exp < (Date.now() / 1000)){
             return removeUser()
-        }
-        console.log("descrpted", descrpted, descrpted.exp < (Date.now() / 1000));
-    
+        }    
         return (
         <>{props.children}</>
         )

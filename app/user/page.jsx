@@ -27,19 +27,14 @@ const User = () => {
 
   useEffect(() => {
     if(response && Object.keys(response).length > 0){
-        console.log(response.token !== undefined);
         setIsClicked(false)
-        console.log("isLogin", isLogin, response.email !== undefined);
         
         if(response.email !== undefined){
             if(!isLogin){
                 toogleForm(true)
-                // setIsLogin(true)
-                // setRegisterForm({})
             } else {
                 window.location.reload()
                 window.location.href = '/dashboard'
-                // router.push('/dashboard')
             }
         }
     }

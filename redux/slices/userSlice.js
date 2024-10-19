@@ -46,17 +46,11 @@ const UserSlice = createSlice({
     otpData: {} ,
     checkEmailData:{},
     registerData:{}
-  }, // Explicitly define the type of initialState
-  reducers: {}, // Define your reducers if any
+  },
+  reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(SignInUser.fulfilled, (state, action) => {
-    //     const payload = action.payload
-    //     console.log("payload", payload);
-    //     state.data = payload;
-    // })
     builder.addCase(RegisterUser.fulfilled, (state, action) => {
         const payload = action.payload
-        console.log("payload", payload);
         state.registerData = payload;
     })
   }

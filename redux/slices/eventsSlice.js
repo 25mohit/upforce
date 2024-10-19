@@ -37,16 +37,12 @@ export const UpdateEvent = createAsyncThunk("UpdateEvent", async (payload, { dis
         headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
         },
-    };
-    console.log("config", config);
-    
+    };    
     const response = await axios.put(`${ENDPOINT}api/events/${payload?._id}`, payload, config);
-
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
     dispatch(GetFilteredEvents({sort: 'createdAt'}))
     toast.success("Event Successfully Updated");
-
     return response.data
 }
 catch (error) {
@@ -65,10 +61,7 @@ export const DeleteEvent = createAsyncThunk("DeleteEvent", async (payload, { dis
             authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
         },
     };
-    console.log("config", config);
-    
     const response = await axios.delete(`${ENDPOINT}api/events/${payload?._id}`, config);
-
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
     dispatch(GetFilteredEvents({sort:'name'}))
@@ -91,17 +84,10 @@ export const GetFilteredEvents = createAsyncThunk("GetFilteredEvents", async (pa
             authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
         },
         params: payload
-    };
-    console.log("config", config);
-    
+    };    
     const response = await axios.get(`${ENDPOINT}api/events/filter`,config);
-
-    console.log("asdadsresponse", response);
-    
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
-    // dispatch(GetUserEvents())
-
     return response.data
 }
 catch (error) {
@@ -116,12 +102,11 @@ const EventsSlice = createSlice({
   name: "events",
   initialState: {
     eventsList: []
-  }, // Explicitly define the type of initialState
-  reducers: {}, // Define your reducers if any
+  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(GetFilteredEvents.fulfilled, (state, action) => {
         const payload = action.payload
-        console.log("payload", payload);
         state.eventsList = payload;
     })
   }

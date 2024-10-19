@@ -48,9 +48,7 @@ export default function Navbar() {
     localStorage.clear()
     window.location.reload()
     router.replace()
-    // window.location.href = '/'
   }
-  console.log("info", info)
   
   return (
     <nav className="flex navbar">
