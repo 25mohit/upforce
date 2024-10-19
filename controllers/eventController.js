@@ -4,7 +4,7 @@ const Event = require('../models/eventModel');
 // @desc Create new event
 // @route POST /api/events
 const createEvent = asyncHandler(async (req, res) => {
-  const { name, date, status } = req.body;
+  const { name, date, status, description } = req.body;
 
   // Check for required fields
   if (!name || !date || !status) {
@@ -17,6 +17,7 @@ const createEvent = asyncHandler(async (req, res) => {
   const event = await Event.create({ 
     user: req.user._id, 
     name, 
+    description,
     date, 
     status 
   });
@@ -28,7 +29,7 @@ const createEvent = asyncHandler(async (req, res) => {
 // @route PUT /api/events/:id
 const updateEvent = asyncHandler(async (req, res) => {
   
-  const { name, date, status } = req.body;
+  const { name, date, status, description } = req.body;
 
   if (!name || !date || !status) {
     return res.status(400).json({ m: 'Please fill all fields' }); // Send JSON response
