@@ -27,6 +27,13 @@ const createEvent = asyncHandler(async (req, res) => {
 // @desc Update event
 // @route PUT /api/events/:id
 const updateEvent = asyncHandler(async (req, res) => {
+  
+  const { name, date, status } = req.body;
+
+  if (!name || !date || !status) {
+    return res.status(400).json({ m: 'Please fill all fields' }); // Send JSON response
+  }
+
   const event = await Event.findById(req.params.id);
 
   // Check if event exists
