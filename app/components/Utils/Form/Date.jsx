@@ -5,17 +5,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import moment from 'moment';
 
-const Date = ({ placeholder, onChange, value }) => {
+const Date = ({ placeholder, onChange, value, error }) => {
     const [uniqueKey, setUniqueKey] = useState()
-    const [isFocused, setIsFocused] = useState(false); // Manage focus state
-    const [selectedDate, setSelectedDate] = useState(null); // Date state
+    const [isFocused, setIsFocused] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
-        function randomNum() {
-            const randomNumber = Math.floor(1000000 + Math.random() * 9000000);
-            return randomNumber.toString();
-        }
-        setUniqueKey(randomNum());
+      function randomNum() {
+        const randomNumber = Math.floor(1000000 + Math.random() * 9000000);
+        return randomNumber.toString();
+      }
+      setUniqueKey(randomNum());
     },[])
 
     useEffect(() => {
@@ -25,15 +25,16 @@ const Date = ({ placeholder, onChange, value }) => {
     },[value])
 
     const handleDateChange = (newValue) => {
-      setSelectedDate(newValue);      
+      setSelectedDate(newValue);   
+      setIsFocused(false)   
       if (onChange) {
         const isoString = dayjs(newValue).toISOString();
-        onChange(isoString); // Pass the selected date to onChange prop
+        onChange(isoString);
       }
     };
 
   return (
-    <div id="asdasd" className="date-field relative w-full rounded-md" onClick={() => setIsFocused(!isFocused)}>
+    <div id="asdasd" className={`date-field relative w-full rounded-md input ${error ? 'error' : ''}`} onClick={() => !isFocused ? setIsFocused(!isFocused) : null}>
       {/* Label/Placeholder */}
       <label
         className={`absolute left-2 top-0 ml-2 ${selectedDate !== null ? 'text-black' : 'text-gray-500'} transition-all duration-300 ease-in-out transform ${
@@ -41,12 +42,12 @@ const Date = ({ placeholder, onChange, value }) => {
         }`}
         id={uniqueKey}
       >
-        {value?.length > 0 ? moment(dayjs(value).toISOString()).format("MMM Do YY") : placeholder}
+        {value?.length > 0 ? moment(dayjs(value).toISOString()).format("MMM Do YY") : (error !== undefined && error?.length) ? error : placeholder}
       </label>
       <div className="date-ui absolute">
         {isFocused && 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateCalendar value={selectedDate} onChange={handleDateChange}/>
+          <DateCalendar value={selectedDate} onChange={handleDateChange}/>
         </LocalizationProvider> }
       </div>
     </div>

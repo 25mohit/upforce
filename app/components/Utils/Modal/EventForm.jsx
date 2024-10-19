@@ -11,9 +11,11 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
     const [formData, setFormData] = useState({
         name: '',
         date: '',
-        status: ''
+        status: 'active'
     })
     const [isEdit, setIsEdit] = useState(false)
+    const [error, setError] = useState({})
+    const [isClicked, setIsClicked] = useState(false)
 
     const response = useSelector((state) => state?.settings?.response)
     const dispatch = useDispatch()
@@ -36,9 +38,29 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
     },[response])
     
     const onClickHandler = e => {
-        e.preventDefault()
-        dispatch(AddNewEvent(formData))
+        if (isClicked) {
+            e.preventDefault();
+            return;
+        }
+        e.preventDefault();
+        if (!formData.date || !formData.name) {
+            let err = {};
+            if (!formData.date) {
+                err.date = "Event Date Required";
+            }
+            if (!formData.name) {
+                err.name = "Event Name Required";
+            }
+            setError(err);
+            return;
+        } else {
+            setIsClicked(true)
+            dispatch(AddNewEvent(formData))
+        }
     }
+
+    console.log("formData", error, formData);
+    
 
     const clearData = () => {
         setFormData({})
@@ -54,10 +76,12 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
         clearData()
         setIsActive(false); 
     }
+
     const handleInputChange = useCallback((e) => {
         const { name, value } = e.target;
         if (formData[name] !== value) {
             setFormData({ ...formData, [name]: value });
+            setError({...error, [name]: ''})
         }
     }, [formData]);
     
@@ -68,10 +92,9 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             <AiOutlineClose className='cursor-pointer' onClick={onCloseHandler}/>
         </header>
         <form action="post" className='flex flex-col gap-2'>
-            <Input onChange={handleInputChange} name='name' value={formData.name} type="text" placeholder="Enter Event Name"/>
-            <Date placeholder="Event Date" onChange={(date) => setFormData({...formData, date})} value={formData?.date}/>
+            <Input error={error.name} onChange={handleInputChange} name='name' value={formData.name} type="text" placeholder="Enter Event Name"/>
+            <Date error={error.date} placeholder="Event Date" onChange={(date) => {setFormData({...formData, date});setError({...error, ['date']: ''})}} value={formData?.date}/>
             <select className='select' onChange={e => setFormData({...formData, ['status']:e.target.value})} value={formData.status?.toLowerCase()}>
-                <option>Select a Status</option>
                 <option value="active">Active</option>
                 <option value="pending">Pending</option>
                 {
