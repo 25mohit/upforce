@@ -101,6 +101,8 @@ const getFilteredEvents = asyncHandler(async (req, res) => {
   const pageSize = 10;
   const skip = (page - 1) * pageSize;
 
+  const totalDocuments = await Event.countDocuments({ user: req.user._id });
+
   const filteredEvents = await Event.find(query)
     .sort(sortOption)
     .skip(skip)
@@ -108,6 +110,7 @@ const getFilteredEvents = asyncHandler(async (req, res) => {
     .select('-updatedAt -__v'); // Exclude 'updatedAt' and '__v'
 
   const eventStats = await Event.aggregate([
+    { $match: { user: req.user._id } },
     {
       $group: {
         _id: '$status',
@@ -133,6 +136,7 @@ const getFilteredEvents = asyncHandler(async (req, res) => {
     filteredData: {
       page,
       pageSize,
+      totalDocuments,
       events: filteredEvents
     }
   });
