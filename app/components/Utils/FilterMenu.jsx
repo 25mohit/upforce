@@ -1,12 +1,23 @@
+import { GetFilteredEvents } from '@/redux/slices/eventsSlice';
 import React from 'react'
+import { useDispatch } from 'react-redux';
 
-const FilterMenu = () => {
+const FilterMenu = ({ setIsShow }) => {
+
+  const dispatch = useDispatch()
+
+  const onChangeHandler = e => {
+    console.log(e.target.value);
+    dispatch(GetFilteredEvents({sort: e.target.value}))
+    setIsShow(false)
+
+  }
   return (
     <div className='filter-menu absolute'>
         <ul className='flex flex-col gap-1'>
-            <li><input type="checkbox" id="name"/><label htmlFor="name">Name</label></li>
-            <li><input type="checkbox" id="createdAt"/><label htmlFor="createdAt">Created at</label></li>
-            <li><input type="checkbox" id="status"/><label htmlFor="status">Status</label></li>
+            <li><input type="radio" value="name" onChange={onChangeHandler} name='filter' id="name"/><label htmlFor="name">Name</label></li>
+            <li><input type="radio" value="createdAt" onChange={onChangeHandler} name='filter' id="createdAt"/><label htmlFor="createdAt">Created at</label></li>
+            <li><input type="radio" value="status" onChange={onChangeHandler} name='filter' id="status"/><label htmlFor="status">Status</label></li>
         </ul>
     </div>
   )

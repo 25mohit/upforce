@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from 'react'
 import FilterMenu from './FilterMenu'
 import { FcFilledFilter } from 'react-icons/fc'
@@ -9,7 +8,7 @@ const Filter = () => {
   return (
     <>
         <FcFilledFilter id="filter-icon" onClick={() => setIsShow(!isShow)} title="Filter Events"/>
-        { isShow && <FilterMenu /> }
+        { isShow && <FilterMenu setIsShow={setIsShow}/> }
     </>
   )
 }

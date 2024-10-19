@@ -253,6 +253,28 @@
     outline: none;
     border: none;
 }
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    width: 25px;
+    aspect-ratio: 1;
+    border: none;
+    background-color: #2a91ff;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+.page-button.active{
+    background-color: white !important;
+    color: rgb(56, 56, 56);
+}
 @media screen and (max-width: 550px) {
     .pc-nav, .footer, .home-wrapper, .section{
         padding: 0 1.75rem;
@@ -277,4 +299,13 @@
     .modal{
         width: 92vw;
     }
+    
+    .cntrns{
+        flex-wrap: wrap;
+        align-items: start;
+        flex-direction: column-reverse;
+        /* justify-content: space-between; */
+        width: 100%;
+    }
+  
 }

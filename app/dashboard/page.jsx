@@ -16,6 +16,7 @@ import { SignInUser } from '@/redux/slices/userSlice'
 import { GetResponse } from '@/redux/slices/settingSlice'
 import AuthWrapper from '../components/HOC/AuthWrapper'
 import dynamic from 'next/dynamic'
+import Pagination from '../components/Utils/Pagination'
 
 const NoSSR = dynamic(() => import('../components/HOC/AuthWrapper'), {ssr: false})
 
@@ -55,7 +56,10 @@ const Dashboard = () => {
 
         setIsCalling(timeOut)
     }
-    
+    const handlePageChange = (page) => {
+        // setCurrentPage(page);
+        dispatch(GetFilteredEvents({page}));
+      };
   return (
     <NoSSR>
         <SectionWrapper>
@@ -69,12 +73,13 @@ const Dashboard = () => {
                     <Input value={filterParam.value} onChange={onSearchChange} type="text" placeholder="Start typing event name to search..." />
                     <Filter />
                 </div>
-                <div className="btns">
+                <div className="cntrns btns flex items-center gap-4">
+                    <Pagination currentPage={response?.filteredData?.page} pageSize={10} totalRecords={response?.filteredData?.totalDocuments} onPageChange={handlePageChange}/>
                     <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={() => setIsActive(true)}/>
                 </div>
             </div>
             <div className="tab-container">
-                <Table data={data?.filteredData?.events} setIsActive={setIsActive} setEditData={setEditData}/>
+                <Table data={data?.filteredData} setIsActive={setIsActive} setEditData={setEditData}/>
             </div>
             { isActive && <EventForm editData={editData} setIsActive={setIsActive} setEditData={setEditData}/>}
         </SectionWrapper>

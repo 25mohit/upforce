@@ -27,17 +27,19 @@ const Table = ({ data, setIsActive, setEditData }) => {
             </thead>
             <tbody>
                 {
-                    data?.map((event, index) => 
-                    <tr key={event?._id}>
-                        <td>{index+1}</td>
-                        <td>{event.name}</td>
-                        <td className='whitespace-nowrap'>{moment(event.createdAt).startOf('minutes').fromNow()}</td>
-                        <td className='whitespace-nowrap'>{moment(event.date).format("MMM Do YYYY")}</td>
-                        <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
-                        <td>
-                            <FaEdit title="Edit Event" id="icon" onClick={() => onEditHandler(event)}/> 
-                            <FaTrashAlt title="Delete Event" id="icon" onClick={() => setDeleteData(event)}/></td>
-                    </tr>)
+                    data?.events?.map((event, index) => {
+                        const displayIndex = (Number(data?.page) - 1) * 10 + index + 1;                        
+                        return (<tr key={event?._id}>
+                            <td>{displayIndex}</td>
+                            <td>{event.name}</td>
+                            <td className='whitespace-nowrap'>{moment(event.createdAt).startOf('minutes').fromNow()}</td>
+                            <td className='whitespace-nowrap'>{moment(event.date).format("MMM Do YYYY")}</td>
+                            <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
+                            <td>
+                                <FaEdit title="Edit Event" id="icon" onClick={() => onEditHandler(event)}/> 
+                                <FaTrashAlt title="Delete Event" id="icon" onClick={() => setDeleteData(event)}/></td>
+                        </tr>)
+                    })
                 }
             </tbody>
         </table>
