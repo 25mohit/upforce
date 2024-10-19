@@ -29,9 +29,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased body`}
       >
+        
+        {/* CUSTOM "PROVIDER" COMPONENT FOR REDUX INTEGRATION */}
         <Providers>
           <Loader />
           <Navbar />
+
+          {/* CUSTOM NOTIFICATION COMPONENT, THAT WILL TRIGGER AUTOMATICLY WHEN A API IS RETURNS RESPONSE */}
           <ToastContainer />
           {children}
           <Footer />

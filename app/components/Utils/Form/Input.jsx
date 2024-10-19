@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Input = ({ type, placeholder, onChange, value = '', error, name }) => {
-  const [isFocused, setIsFocused] = useState(false); // Manage focus state
+  const [isFocused, setIsFocused] = useState(false);
   const [showPass, setShowPass] = useState(false)
   const [uniqueKey, setUniqueKey] = useState(null)
 
@@ -41,7 +41,7 @@ const Input = ({ type, placeholder, onChange, value = '', error, name }) => {
         type={type === 'password' ? (showPass ? 'text' : 'password') : type}
         className="w-full text-gray-800 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
         onFocus={() => setIsFocused(true)}
-        onBlur={(e) => !e.target.value && setIsFocused(false)} // Keep label up if input is filled
+        onBlur={(e) => !e.target.value && setIsFocused(false)}
       />
       {
         (type === 'password' && value?.length > 0) && ( !showPass ? <FaEye onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/> : <FaEyeSlash onClick={() => setShowPass(!showPass)} className='absolute right-3 cursor-pointer bottom-3 text-gray-400'/>)

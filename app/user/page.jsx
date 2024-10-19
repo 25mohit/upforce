@@ -4,7 +4,6 @@ import Section from '../components/HOC/Section';
 import Input from '../components/Utils/Form/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { RegisterUser, SignInUser } from '@/redux/slices/userSlice';
-import { useRouter } from 'next/navigation';
 import { isValidEmail } from '../functions';
 
 const User = () => {
@@ -18,21 +17,22 @@ const User = () => {
   const [isClicked, setIsClicked] = useState(false)
 
   const dispatch = useDispatch()
-  const router = useRouter()
   const response = useSelector((state) => state?.settings?.response)
 
   useEffect(() => {
     localStorage.clear()
   },[])
 
+  // TOOGLING REGISTRATION FORM AFTER SUCCESS IN API
   useEffect(() => {
     if(response && Object.keys(response).length > 0){
         setIsClicked(false)
-        
         if(response.email !== undefined){
             if(!isLogin){
                 toogleForm(true)
             } else {
+
+              // IF THRER IS SUCCESS IN LOGIN API THEN REDIRECTING USER TO /DASHBOARD ROUTE
                 window.location.reload()
                 window.location.href = '/dashboard'
             }
@@ -40,15 +40,17 @@ const User = () => {
     }
   },[response])
 
+  // ONCHANGE HANDLER FOR LOGIN FORM FIELDS
   const LoginChangeHandler = e => {
     const {name, value} = e.target
     setLoginForm({...loginForm, [name]:value.trim()})
     setError({...error, [name]: ''})
   }
 
+  // ONCHANGE HANDLER FOR REGISTER USER FORM FIELDS
   const RegisterChangeHandler = e => {
     const {name, value} = e.target
-    setRegisterForm({...registerForm, [name]:value})
+    setRegisterForm({...registerForm, [name]:value.trim()})
     setError({...error, [name]: ''})
   }
   
@@ -63,6 +65,8 @@ const User = () => {
         ...registerForm,
         userName: registerForm?.userName?.trim()
     };
+
+    // VERIFING REGISTER FIELDS AND VALIDATION EMAIL STRING TO BE A VALID TYPE OF EMAIL
     if (!registerForm.email || !trimmedFormData.password || !trimmedFormData.userName || !isValidEmail(registerForm.email)) {
       let err = {};
       if (!registerForm.email) {

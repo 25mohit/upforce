@@ -6,18 +6,14 @@ import Input from '../components/Utils/Form/Input'
 import Button from '../components/Utils/Form/Button'
 import { MdOutlineEmojiEvents } from "react-icons/md";
 import Table from '../components/Utils/Table'
-import { FcFilledFilter } from "react-icons/fc";
-import FilterMenu from '../components/Utils/FilterMenu'
 import Filter from '../components/Utils/Filter'
 import EventForm from '../components/Utils/Modal/EventForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetFilteredEvents } from '@/redux/slices/eventsSlice'
-import { SignInUser } from '@/redux/slices/userSlice'
-import { GetResponse } from '@/redux/slices/settingSlice'
-import AuthWrapper from '../components/HOC/AuthWrapper'
 import dynamic from 'next/dynamic'
 import Pagination from '../components/Utils/Pagination'
 
+// AUTHWRAPPER HOC COMPONENT FOR VALIDATING WEATHER A USER IS LOGGEDIN OR NOT
 const NoSSR = dynamic(() => import('../components/HOC/AuthWrapper'), {ssr: false})
 
 const Dashboard = () => {
@@ -30,16 +26,19 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const response = useSelector((state) => state?.events?.eventsList)
     
+    // GETTING EVENTS LIST ON INITIAL PAGE LOAD
     useEffect(() => {
         dispatch(GetFilteredEvents(filterParam))
     },[])
 
+    // SETTING EVENTS IN setData STATE
     useEffect(() => {
         if(response?.length || Object.keys(response)?.length > 0){
             setData(response)
         }
     },[response])
 
+    // DEBOUNCED SEARCH CHANGE FUNCTION THAT WILL TRIGGER AFTER 1 SECOND WHEN USER STOPS TYPING FOR BETTER PERFORMANCE
     const onSearchChange = e => {
         const value = e.target.value
         setFilterParam({search:value})
@@ -56,9 +55,11 @@ const Dashboard = () => {
 
         setIsCalling(timeOut)
     }
+
     const handlePageChange = (page) => {
         dispatch(GetFilteredEvents({page}));
-      };
+    };
+
   return (
     <NoSSR>
         <SectionWrapper>

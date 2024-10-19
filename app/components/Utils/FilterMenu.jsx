@@ -8,8 +8,9 @@ const FilterMenu = ({ setIsShow }) => {
 
   const onChangeHandler = e => {
     dispatch(GetFilteredEvents({sort: e.target.value}))
-    setIsShow(false)
-
+    setTimeout(() => {
+      setIsShow(false)
+    },100)
   }
   return (
     <div className='filter-menu absolute'>

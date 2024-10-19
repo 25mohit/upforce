@@ -11,7 +11,8 @@ npm install
 npm run dev
 ```
 
-Deployed Link [https://upforce.netlify.app/](https://upforce.netlify.app/).
+Deployed Link - FrontEnd [https://upforce.netlify.app/](https://upforce.netlify.app/).
+Deployed Link - Backend [https://github.com/25mohit/upforce/tree/Backend](https://github.com/25mohit/upforce/tree/Backend).
 
 ## How to Use the Project?
 
