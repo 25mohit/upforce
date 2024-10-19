@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Section from '../components/HOC/Section'
+import SectionWrapper from '../components/HOC/Section'
 import Stats from '../components/Utils/Card/Stats'
 import Input from '../components/Utils/Form/Input'
 import Button from '../components/Utils/Form/Button'
@@ -15,6 +15,9 @@ import { GetFilteredEvents } from '@/redux/slices/eventsSlice'
 import { SignInUser } from '@/redux/slices/userSlice'
 import { GetResponse } from '@/redux/slices/settingSlice'
 import AuthWrapper from '../components/HOC/AuthWrapper'
+import dynamic from 'next/dynamic'
+
+const NoSSR = dynamic(() => import('../components/HOC/AuthWrapper'), {ssr: false})
 
 const Dashboard = () => {
     const [data, setData] = useState([])
@@ -78,8 +81,8 @@ const Dashboard = () => {
     }
     
   return (
-    <AuthWrapper>
-        <Section>
+    <NoSSR>
+        <SectionWrapper>
             <div className="stats-bar flex flex-wrap gap-4">
                 <Stats type="active" count={response?.stats?.active}/>
                 <Stats type="pending" count={response?.stats?.pending}/>
@@ -98,8 +101,8 @@ const Dashboard = () => {
                 <Table data={data?.filteredData?.events} setIsActive={setIsActive} setEditData={setEditData}/>
             </div>
             { isActive && <EventForm editData={editData} setIsActive={setIsActive} setEditData={setEditData}/>}
-        </Section>
-    </AuthWrapper>
+        </SectionWrapper>
+    </NoSSR>
   )
 }
 

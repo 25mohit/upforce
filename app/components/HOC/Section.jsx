@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Section = props => {
+const SectionWrapper = props => {
   return (
     <section className='section'>{props.children}</section>
   )
 }
 
-export default Section
+export default SectionWrapper
