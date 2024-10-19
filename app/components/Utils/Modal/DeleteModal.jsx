@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import Button from '../Form/Button'
 import { FaCheck } from "react-icons/fa6";
 import { MdOutlineBackHand } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteEvent } from '@/redux/slices/eventsSlice';
 
 const DeleteModal = ({ data, setData }) => {
 
+    const dispatch = useDispatch()
+    const response = useSelector((state) => state?.settings?.response)
+
+    useEffect(() => {
+        if(response && Object.keys(response).length > 0){
+            if(response?.success){
+                setData({})
+            }
+        }
+    },[response])
+
     const onDeleteHandler = () => {
         alert('asd')
+        dispatch(DeleteEvent(data))
     }
   return (
     <div className='modal'>

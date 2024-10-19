@@ -4,15 +4,12 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import DeleteModal from './Modal/DeleteModal';
 
 const Table = ({ data, setIsActive, setEditData }) => {
-    console.log("data", data);
+
     const [deleteData, setDeleteData] = useState({})
     
     const onEditHandler = (rowData) => {
         setIsActive(true)
         setEditData(rowData)
-    }
-    const onDeleteHandler = (rowData) => {
-        setDeleteData(rowData)
     }
 
   return (
@@ -39,7 +36,7 @@ const Table = ({ data, setIsActive, setEditData }) => {
                         <td><span className={`chip capitalize ${event.status?.toLowerCase()}`}>{event.status}</span></td>
                         <td>
                             <FaEdit title="Edit Event" id="icon" onClick={() => onEditHandler(event)}/> 
-                            <FaTrashAlt title="Delete Event" id="icon" onClick={() => onDeleteHandler(event)}/></td>
+                            <FaTrashAlt title="Delete Event" id="icon" onClick={() => setDeleteData(event)}/></td>
                     </tr>)
                 }
             </tbody>

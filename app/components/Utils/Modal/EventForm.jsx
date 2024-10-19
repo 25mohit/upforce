@@ -31,7 +31,6 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             if(response?._id !== undefined){
                 setFormData({})
                 setIsActive(false)
-                dispatch(GetUserEvents())
             }
         }
     },[response])

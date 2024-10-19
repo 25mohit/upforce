@@ -28,7 +28,7 @@ catch (error) {
 })
 
 
-export const AddNewEvent = createAsyncThunk("GetUserEvents", async (payload, { dispatch }) => {
+export const AddNewEvent = createAsyncThunk("AddNewEvent", async (payload, { dispatch }) => {
   dispatch(ShowLoader(true))
   try {
     const config = {
@@ -42,6 +42,7 @@ export const AddNewEvent = createAsyncThunk("GetUserEvents", async (payload, { d
 
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
+    dispatch(GetUserEvents())
     toast.success("Event Successfully Created");
 
     return response.data
@@ -52,7 +53,8 @@ catch (error) {
     throw error;
   }
 })
-export const UpdateEvent = createAsyncThunk("GetUserEvents", async (payload, { dispatch }) => {
+
+export const UpdateEvent = createAsyncThunk("UpdateEvent", async (payload, { dispatch }) => {
   dispatch(ShowLoader(true))
   try {
     const config = {
@@ -66,7 +68,34 @@ export const UpdateEvent = createAsyncThunk("GetUserEvents", async (payload, { d
 
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
+    dispatch(GetUserEvents())
     toast.success("Event Successfully Updated");
+
+    return response.data
+}
+catch (error) {
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(error.response.data))
+    throw error;
+  }
+})
+
+export const DeleteEvent = createAsyncThunk("DeleteEvent", async (payload, { dispatch }) => {
+  dispatch(ShowLoader(true))
+  try {
+    const config = {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
+        },
+    };
+    console.log("config", config);
+    
+    const response = await axios.delete(`${ENDPOINT}api/events/${payload?._id}`, config);
+
+    dispatch(ShowLoader(false))
+    dispatch(GetResponse(response.data))
+    dispatch(GetUserEvents())
+    toast.warn("Event Successfully Deleted");
 
     return response.data
 }
