@@ -13,7 +13,7 @@ npm run dev
 
 Deployed Link [https://upforce.netlify.app/](https://upforce.netlify.app/).
 
-## How to Use the Project?.
+## How to Use the Project?
 
 1. You Need to Register with your email and password.
 2. After Registering you can login with your credentials.
@@ -26,11 +26,18 @@ Deployed Link [https://upforce.netlify.app/](https://upforce.netlify.app/).
 
 ## Requirements i Covered in this Assignment
 
-1. Frontend : I have use Next.js and TailwindCSS.
-2. Backend : I have use Express.js, MongoDB, Node.js.
+1. Frontend : I have used Next.js and TailwindCSS.
+2. Backend : I have used Express.js, MongoDB, Node.js.
 3. Authentication : JWT, providing while login, and verify it every time user uses Dashboard Page.
 4. Pages : User Page - Where user can Register and Login.
 5. Event Dashboard : Displayed a Paginated list of Events sorted by Created Date.
 6. Functionality to Add, Edit, Delete the events and user can only see events added by themself.
 7. Search Functionality - Where user can search there added events by Events Names.
 8. Filter Functionality - A Filter Dropdown, where user can filter Events.
+
+## EXTRA FEATURES
+
+1. Redux and Redux-Toolkit Integration for Proper state management and for API Integration/ Consumption.
+2. Toast Notification - Notification integrated in Every API, whever user integrated with an API, a Notification will popup. Exp- While Registering, Login, Adding Events, Updating Events, Deleting Events.
+3. Events Statistics - User can see there added events status. There are 3 status Active, Pending, Cancelled.
+4. Sorting Events Feature.
