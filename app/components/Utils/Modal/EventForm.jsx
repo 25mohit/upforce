@@ -4,13 +4,14 @@ import Button from '../Form/Button';
 import Input from '../Form/Input';
 import Date from '../Form/Date';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddNewEvent, GetUserEvents, UpdateEvent } from '@/redux/slices/eventsSlice';
+import { AddNewEvent, UpdateEvent } from '@/redux/slices/eventsSlice';
 
 const EventForm = ({ setIsActive, editData, setEditData }) => {
     
     const [formData, setFormData] = useState({
         name: '',
         date: '',
+        description: '',
         status: 'active'
     })
     const [isEdit, setIsEdit] = useState(false)
@@ -19,7 +20,6 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
 
     const response = useSelector((state) => state?.settings?.response)
     const dispatch = useDispatch()
-    console.log(response)
 
     useEffect(() => {
         if(editData && Object.keys(editData).length > 0){
@@ -59,17 +59,31 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
         }
     }
 
-    console.log("formData", error, formData);
-    
-
     const clearData = () => {
         setFormData({})
         setEditData({})
     }
-    const onUpdateHandler = e => {
-        e.preventDefault()
-        dispatch(UpdateEvent(formData))
-        clearData()
+    const onUpdateHandler = e => {        
+        if (isClicked) {
+            e.preventDefault();
+            return;
+        }
+        e.preventDefault();
+        if (!formData.date || !formData.name) {
+            let err = {};
+            if (!formData.date) {
+                err.date = "Event Date Required";
+            }
+            if (!formData.name) {
+                err.name = "Event Name Required";
+            }
+            setError(err);
+            return;
+        } else {
+            setIsClicked(true)
+            dispatch(UpdateEvent(formData))
+            clearData()
+        }
     }
 
     const onCloseHandler = () => {
@@ -91,8 +105,9 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
             <h1>{isEdit ? 'Update' : 'Add new'} Event</h1>
             <AiOutlineClose className='cursor-pointer' onClick={onCloseHandler}/>
         </header>
-        <form action="post" className='flex flex-col gap-2'>
+        <form action="post" className='flex flex-col gap-4'>
             <Input error={error.name} onChange={handleInputChange} name='name' value={formData.name} type="text" placeholder="Enter Event Name"/>
+            <Input onChange={handleInputChange} name='description' value={formData.description} type="text" placeholder="Enter Event Description"/>
             <Date error={error.date} placeholder="Event Date" onChange={(date) => {setFormData({...formData, date});setError({...error, ['date']: ''})}} value={formData?.date}/>
             <select className='select' onChange={e => setFormData({...formData, ['status']:e.target.value})} value={formData.status?.toLowerCase()}>
                 <option value="active">Active</option>
@@ -105,7 +120,6 @@ const EventForm = ({ setIsActive, editData, setEditData }) => {
                 isEdit ?
                 <Button label="Update Event" onClicker={onUpdateHandler}/> :
                 <Button label="Create Event" onClicker={onClickHandler}/>
-
             }
         </form>
     </div>

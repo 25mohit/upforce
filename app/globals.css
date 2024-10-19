@@ -111,8 +111,8 @@
 .table table thead th:nth-child(2){
     min-width: 15rem;
 }
-.table table tbody td:nth-child(2){
-    text-align: left;
+.tx-left{
+    text-align: left !important;
 }
 .table table tbody td{
     text-align: center;
@@ -227,7 +227,7 @@
 }
 #asdasd{
     width: 100%;
-    margin: 1rem 0;
+    /* margin: 1rem 0; */
     border: 2px solid white;
     padding: 1.2rem 0;
     background-color: white;

@@ -13,13 +13,12 @@ export const AddNewEvent = createAsyncThunk("AddNewEvent", async (payload, { dis
             authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token in Authorization header
         },
     };
-    console.log("config", config);
     
     const response = await axios.post(`${ENDPOINT}api/events`, payload, config);
 
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
-    dispatch(GetFilteredEvents({sort: 'name'}))
+    dispatch(GetFilteredEvents({sort: 'createdAt'}))
     toast.success("Event Successfully Created");
 
     return response.data
@@ -45,7 +44,7 @@ export const UpdateEvent = createAsyncThunk("UpdateEvent", async (payload, { dis
 
     dispatch(ShowLoader(false))
     dispatch(GetResponse(response.data))
-    dispatch(GetFilteredEvents({sort: 'name'}))
+    dispatch(GetFilteredEvents({sort: 'createdAt'}))
     toast.success("Event Successfully Updated");
 
     return response.data

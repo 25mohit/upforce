@@ -24,7 +24,7 @@ const Dashboard = () => {
     const [data, setData] = useState([])
     const [isActive, setIsActive] = useState(false)
     const [editData, setEditData] = useState({})
-    const [filterParam, setFilterParam] = useState({sort: 'name'})
+    const [filterParam, setFilterParam] = useState({sort: 'createdAt'})
     const [isCalling, setIsCalling] = useState(null)
 
     const dispatch = useDispatch()
@@ -44,7 +44,7 @@ const Dashboard = () => {
         const value = e.target.value
         setFilterParam({search:value})
 
-        if(!value?.length) return dispatch(GetFilteredEvents({sort: 'name'}))
+        if(!value?.length) return dispatch(GetFilteredEvents({sort: 'createdAt'}))
         
         if(isCalling){
             clearTimeout(isCalling)
