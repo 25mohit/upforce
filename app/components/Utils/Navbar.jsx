@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import { FaSignOutAlt } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [info, setInfo] = useState({})
-
+  const router = useRouter();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -51,7 +52,8 @@ export default function Navbar() {
   const onLogoutHandler = () => {
     localStorage.clear()
     window.location.reload()
-    window.location.href = '/'
+    router.replace()
+    // window.location.href = '/'
   }
   console.log("info", info)
   

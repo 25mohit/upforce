@@ -31,50 +31,26 @@ const Dashboard = () => {
     
     useEffect(() => {
         dispatch(GetFilteredEvents(filterParam))
-        // dispatch(GetUserEvents())
     },[])
 
     useEffect(() => {
         if(response?.length || Object.keys(response)?.length > 0){
-            // alert("Hello")
             setData(response)
-            // dispatch(GetResponse({}))
         }
     },[response])
 
-    const onClickHandler = () => {
-        setIsActive(true)
-    }
-
-    console.log("response", response);
-    
-    // useEffect(() => {
-    //     if(filterParam.key === 'search'){
-
-    //         if(!isSearching){
-    //             isSearching = true
-    //             console.log('API Calling');
-    //             setTimeout(() => {
-    //                 isSearching = false
-    //             },2000)
-    //         }
-    //     }
-    // },[filterParam])
-
-    const deboucedSearch = () => {
-        console.log("API Calling")
-        dispatch(GetFilteredEvents(filterParam))
-    }
-
     const onSearchChange = e => {
-        setFilterParam({search:e.target.value})
+        const value = e.target.value
+        setFilterParam({search:value})
 
+        if(!value?.length) return dispatch(GetFilteredEvents({sort: 'name'}))
+        
         if(isCalling){
             clearTimeout(isCalling)
         }
-
+        
         const timeOut = setTimeout(() => {
-            deboucedSearch()
+            dispatch(GetFilteredEvents({search: value}))
         },1000)
 
         setIsCalling(timeOut)
@@ -94,7 +70,7 @@ const Dashboard = () => {
                     <Filter />
                 </div>
                 <div className="btns">
-                    <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={onClickHandler}/>
+                    <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={() => setIsActive(true)}/>
                 </div>
             </div>
             <div className="tab-container">
