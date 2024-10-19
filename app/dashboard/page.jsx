@@ -73,7 +73,7 @@ const Dashboard = () => {
                     <Input value={filterParam.search} onChange={onSearchChange} type="text" placeholder="Start typing event name to search..." />
                     <Filter />
                 </div>
-                <div className="cntrns btns flex items-center gap-4">
+                <div className="cntrns flex items-center gap-4">
                     <Pagination currentPage={response?.filteredData?.page} pageSize={10} totalRecords={response?.filteredData?.totalDocuments} onPageChange={handlePageChange}/>
                     <Button icon={<MdOutlineEmojiEvents />} label="Add New Event" onClicker={() => setIsActive(true)}/>
                 </div>
