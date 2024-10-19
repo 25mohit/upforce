@@ -4,14 +4,15 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Input = ({ type, placeholder, onChange, value = '', error, name }) => {
   const [isFocused, setIsFocused] = useState(false); // Manage focus state
   const [showPass, setShowPass] = useState(false)
-  const [uniqueKey, setUniqueKey] = useState()
+  const [uniqueKey, setUniqueKey] = useState(null)
 
   useEffect(() => {
-    function randomNum() {
-      const randomNumber = Math.floor(1000000 + Math.random() * 9000000);
-      return randomNumber.toString();
-  }
-    setUniqueKey(randomNum())
+    function generateRandomNumber() {
+      const currentTime = Date.now(); // Get the current timestamp
+      const randomNumber = Math.floor(Math.random() * currentTime); // Generate a random number based on the current timestamp
+      return `${randomNumber}`;
+    }
+    setUniqueKey(generateRandomNumber())
   },[])
 
   useEffect(() => {

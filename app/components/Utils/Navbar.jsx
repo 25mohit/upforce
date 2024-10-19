@@ -68,10 +68,10 @@ export default function Navbar() {
 
         {/* Center Menu */}
         <div className="hidden md:flex space-x-8 text-md">
-          <Link href="/" className="hover:text-gray-400 transition duration-300">Home</Link>
-          <Link href="/about" className="hover:text-gray-400 transition duration-300">About</Link>
-          <Link href="/services" className="hover:text-gray-400 transition duration-300">Services</Link>
-          <Link href="/contact" className="hover:text-gray-400 transition duration-300">Contact</Link>
+          <span className="cursor-pointer hover:text-gray-400 transition duration-300">Home</span>
+          <span className="cursor-pointer hover:text-gray-400 transition duration-300">About</span>
+          <span className="cursor-pointer hover:text-gray-400 transition duration-300">Services</span>
+          <span className="cursor-pointer hover:text-gray-400 transition duration-300">Contact</span>
         </div>
 
         {/* Login Link */}
